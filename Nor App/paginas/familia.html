@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NorApp | Familia</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/estilo.css"
+    >
+
+    <style>
+
+        /* =====================================
+           CERRAR SESIÓN
+           ===================================== */
+
+        .cerrar-sesion {
+            margin-top: 15px !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+            padding-top: 15px !important;
+        }
+
+        .cerrar-sesion:hover {
+            background: #C62828 !important;
+            color: #FFFFFF !important;
+        }
+
+
+        /* =====================================
+           CONTACTO FAMILIAR
+           ===================================== */
+
+        .contacto-familiar {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 25px;
+            background: #EAF5FF;
+            border: 2px solid #145DA0;
+            border-radius: 16px;
+            margin-top: 20px;
+        }
+
+
+        .icono-familiar {
+            font-size: 4rem;
+        }
+
+
+        .informacion-familiar h3 {
+            margin-bottom: 8px;
+        }
+
+
+        .informacion-familiar p {
+            margin: 5px 0;
+        }
+
+
+        /* =====================================
+           ESTADO
+           ===================================== */
+
+        .estado-familia {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 20px;
+            background: #E8F5E9;
+            color: #287D4A;
+            font-weight: bold;
+        }
+
+
+        /* =====================================
+           EMERGENCIA
+           ===================================== */
+
+        .emergencia-familia {
+            background: #FFF3E0;
+            border: 2px solid #C58A00;
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 20px;
+        }
+
+
+        .emergencia-familia h3 {
+            color: #C58A00;
+        }
+
+
+        /* =====================================
+           RESPUESTA
+           ===================================== */
+
+        #respuestaFamilia {
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            margin-top: 20px;
+            background: #EAF5FF;
+            border: 2px solid #145DA0;
+            border-radius: 16px;
+            font-size: 1.1rem;
+        }
+
+
+        /* =====================================
+           ARDUINO
+           ===================================== */
+
+        .arduino-info {
+            background: #E8F5E9;
+            border: 2px solid #287D4A;
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+
+        /* =====================================
+           RESPONSIVE
+           ===================================== */
+
+        @media (max-width: 700px) {
+
+            .contacto-familiar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================
+         MENÚ LATERAL
+         ===================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h1>NorApp</h1>
+
+            <p>
+                Bienestar y seguridad
+            </p>
+
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="../index.html">
+                🏠 Inicio
+            </a>
+
+            <a href="perfil.html">
+                👤 Perfil
+            </a>
+
+            <a href="salud.html">
+                ❤️ Salud
+            </a>
+
+            <a href="caidas.html">
+                🚨 Detección de caídas
+            </a>
+
+            <a href="ubicacion.html">
+                📍 Ubicación
+            </a>
+
+            <a href="recordatorios.html">
+                💊 Recordatorios
+            </a>
+
+            <a href="alertas.html">
+                🔔 Alertas
+            </a>
+
+            <a href="asistente.html">
+                🤖 Asistente IA
+            </a>
+
+            <a href="familia.html">
+                👨‍👩‍👧 Familia
+            </a>
+
+            <a href="historial.html">
+                📋 Historial
+            </a>
+
+            <a href="configuracion.html">
+                ⚙️ Configuración
+            </a>
+
+
+            <a
+                href="#"
+                onclick="cerrarSesion(); return false;"
+                class="cerrar-sesion"
+            >
+                🚪 Cerrar sesión
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- =====================================
+         CONTENIDO PRINCIPAL
+         ===================================== -->
+
+    <main class="main">
+
+
+        <!-- =====================================
+             CABECERA
+             ===================================== -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h2>
+                    👨‍👩‍👧 Familia
+                </h2>
+
+                <p>
+                    Contacto y apoyo familiar
+                </p>
+
+            </div>
+
+
+            <div class="usuario">
+
+                👤
+                <span id="nombreFamilia">
+                    Usuario
+                </span>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================
+             ESTADO DEL SISTEMA
+             ===================================== -->
+
+        <section class="cards">
+
+
+            <div class="card">
+
+                <h3>
+                    👨‍👩‍👧 Familiar
+                </h3>
+
+                <div class="numero">
+                    ✓
+                </div>
+
+                <p class="estado-normal">
+                    Registrado
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    📞 Contacto
+                </h3>
+
+                <div class="numero">
+                    ✓
+                </div>
+
+                <p>
+                    Disponible
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    📍 Ubicación
+                </h3>
+
+                <div class="numero">
+                    ✓
+                </div>
+
+                <p>
+                    Preparada
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    🚨 Emergencias
+                </h3>
+
+                <div class="numero">
+                    ✓
+                </div>
+
+                <p>
+                    Sistema activo
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             CONTACTO FAMILIAR
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                👨‍👩‍👧 Mi contacto familiar
+            </h3>
+
+
+            <div class="contacto-familiar">
+
+                <div class="icono-familiar">
+                    👤
+                </div>
+
+
+                <div class="informacion-familiar">
+
+                    <h3 id="nombreContacto">
+                        Familiar registrado
+                    </h3>
+
+                    <p>
+                        📞
+                        <strong id="telefonoContacto">
+                            No registrado
+                        </strong>
+                    </p>
+
+                    <p>
+                        Relación:
+                        <strong id="relacionContacto">
+                            Familiar
+                        </strong>
+                    </p>
+
+                    <span class="estado-familia">
+                        ● Contacto disponible
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="respuestaFamilia"
+            >
+
+                👋 Aquí podrás contactar a tu familiar
+                registrado cuando necesites ayuda.
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             ACCIONES
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                📞 ¿Qué necesitas hacer?
+            </h3>
+
+
+            <p>
+                Selecciona una opción.
+            </p>
+
+
+            <div class="botones">
+
+
+                <button
+                    class="btn"
+                    onclick="contactarFamilia()"
+                >
+
+                    📞
+                    <br>
+
+                    Contactar a mi familia
+
+                </button>
+
+
+
+                <button
+                    class="btn"
+                    onclick="mostrarUbicacionFamilia()"
+                >
+
+                    📍
+                    <br>
+
+                    Compartir mi ubicación
+
+                </button>
+
+
+
+                <button
+                    class="btn"
+                    onclick="mostrarEmergenciaFamilia()"
+                >
+
+                    🚨
+                    <br>
+
+                    Necesito ayuda
+
+                </button>
+
+
+
+                <button
+                    class="btn"
+                    onclick="irHistorialFamilia()"
+                >
+
+                    📋
+                    <br>
+
+                    Ver historial
+
+                </button>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             EMERGENCIA
+             ===================================== -->
+
+        <section
+            class="panel"
+            id="panelEmergencia"
+            style="display: none;"
+        >
+
+            <div class="emergencia-familia">
+
+                <h3>
+                    🚨 Solicitud de ayuda
+                </h3>
+
+                <p>
+
+                    Si necesitas asistencia,
+                    NorApp puede iniciar el protocolo
+                    de emergencia y avisar al contacto
+                    familiar registrado.
+
+                </p>
+
+
+                <button
+                    class="btn"
+                    onclick="confirmarAyudaFamilia()"
+                >
+
+                    🚨 Confirmar solicitud de ayuda
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             UBICACIÓN
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                📍 Ubicación y familia
+            </h3>
+
+
+            <p>
+
+                En una situación de emergencia,
+                NorApp podrá utilizar la ubicación
+                disponible para facilitar que el
+                familiar pueda saber dónde se encuentra
+                la persona.
+
+            </p>
+
+
+            <div class="aviso">
+
+                <strong>
+                    📍 Estado de ubicación
+                </strong>
+
+                <p id="estadoUbicacionFamilia">
+
+                    Ubicación disponible en el prototipo.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             ARDUINO
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                🔌 Conexión con Arduino
+            </h3>
+
+
+            <div class="arduino-info">
+
+                <strong>
+                    ⌚ Preparado para el dispositivo
+                </strong>
+
+
+                <p>
+
+                    En una versión futura, el dispositivo
+                    portátil conectado a Arduino podrá
+                    enviar una señal cuando detecte una
+                    situación de emergencia.
+
+                </p>
+
+
+                <p>
+
+                    NorApp podrá recibir esa señal y
+                    mostrar una alerta para el familiar.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             HISTORIAL
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                📋 Seguimiento familiar
+            </h3>
+
+
+            <div class="lista">
+
+
+                <div class="item">
+
+                    <strong>
+                        🚨 Alertas
+                    </strong>
+
+                    <p>
+                        El familiar puede recibir
+                        información sobre situaciones
+                        de emergencia.
+                    </p>
+
+                </div>
+
+
+                <div class="item">
+
+                    <strong>
+                        ❤️ Salud
+                    </strong>
+
+                    <p>
+                        Las mediciones registradas
+                        pueden formar parte del seguimiento.
+                    </p>
+
+                </div>
+
+
+                <div class="item">
+
+                    <strong>
+                        💊 Medicamentos
+                    </strong>
+
+                    <p>
+                        Las confirmaciones de medicamentos
+                        pueden quedar registradas.
+                    </p>
+
+                </div>
+
+
+                <div class="item">
+
+                    <strong>
+                        📍 Ubicación
+                    </strong>
+
+                    <p>
+                        La ubicación puede utilizarse
+                        durante una emergencia.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             INFORMACIÓN
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                ℹ️ Sobre esta función
+            </h3>
+
+
+            <p>
+
+                La sección Familia está diseñada para
+                mantener conectado al adulto mayor con
+                una persona de confianza.
+
+            </p>
+
+
+            <div class="aviso">
+
+                <strong>
+                    ⚠️ Prototipo académico
+                </strong>
+
+                <p>
+
+                    Las llamadas, mensajes, ubicación
+                    y notificaciones familiares están
+                    simuladas en esta versión.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================
+         JAVASCRIPT
+         ===================================== -->
+
+    <script src="../js/app.js"></script>
+
+
+    <script>
+
+        /* =====================================
+           CARGAR DATOS
+           ===================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const usuario =
+                    localStorage.getItem("norappUsuario");
+
+                const contacto =
+                    localStorage.getItem("norappContacto");
+
+                const telefono =
+                    localStorage.getItem("norappTelefono");
+
+
+                const nombreUsuario =
+                    document.getElementById(
+                        "nombreFamilia"
+                    );
+
+                const nombreContacto =
+                    document.getElementById(
+                        "nombreContacto"
+                    );
+
+                const telefonoContacto =
+                    document.getElementById(
+                        "telefonoContacto"
+                    );
+
+
+                if (usuario && nombreUsuario) {
+
+                    nombreUsuario.textContent =
+                        usuario;
+
+                }
+
+
+                if (contacto && nombreContacto) {
+
+                    nombreContacto.textContent =
+                        contacto;
+
+                }
+
+
+                if (telefono && telefonoContacto) {
+
+                    telefonoContacto.textContent =
+                        telefono;
+
+                }
+
+            }
+        );
+
+
+        /* =====================================
+           CONTACTAR FAMILIA
+           ===================================== */
+
+        function contactarFamilia() {
+
+            const contacto =
+                localStorage.getItem("norappContacto");
+
+            const telefono =
+                localStorage.getItem("norappTelefono");
+
+
+            const respuesta =
+                document.getElementById(
+                    "respuestaFamilia"
+                );
+
+
+            if (contacto && telefono) {
+
+                respuesta.innerHTML =
+                    "📞 Contactando a <strong>" +
+                    contacto +
+                    "</strong> al número <strong>" +
+                    telefono +
+                    "</strong>...";
+
+            } else {
+
+                respuesta.innerHTML =
+                    "⚠️ No hay un contacto familiar registrado. " +
+                    "Puedes agregarlo desde Configuración.";
+
+            }
+
+        }
+
+
+        /* =====================================
+           MOSTRAR UBICACIÓN
+           ===================================== */
+
+        function mostrarUbicacionFamilia() {
+
+            const ciudad =
+                localStorage.getItem("norappCiudad");
+
+
+            const respuesta =
+                document.getElementById(
+                    "respuestaFamilia"
+                );
+
+
+            if (ciudad) {
+
+                respuesta.innerHTML =
+                    "📍 Ubicación disponible: <strong>" +
+                    ciudad +
+                    ", Chile</strong>.";
+
+            } else {
+
+                respuesta.innerHTML =
+                    "📍 La ubicación está disponible " +
+                    "en el prototipo de NorApp.";
+
+            }
+
+        }
+
+
+        /* =====================================
+           MOSTRAR EMERGENCIA
+           ===================================== */
+
+        function mostrarEmergenciaFamilia() {
+
+            const panel =
+                document.getElementById(
+                    "panelEmergencia"
+                );
+
+
+            panel.style.display = "block";
+
+
+            panel.scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* =====================================
+           CONFIRMAR AYUDA
+           ===================================== */
+
+        function confirmarAyudaFamilia() {
+
+            localStorage.setItem(
+                "norappAlerta",
+                "familia"
+            );
+
+
+            localStorage.setItem(
+                "norappFechaAlerta",
+                new Date().toLocaleString("es-CL")
+            );
+
+
+            const respuesta =
+                document.getElementById(
+                    "respuestaFamilia"
+                );
+
+
+            respuesta.innerHTML =
+                "🚨 <strong>Solicitud de ayuda registrada.</strong><br>" +
+                "El contacto familiar será notificado en " +
+                "la versión conectada del sistema.";
+
+
+            document.getElementById(
+                "panelEmergencia"
+            ).style.display = "none";
+
+        }
+
+
+        /* =====================================
+           IR AL HISTORIAL
+           ===================================== */
+
+        function irHistorialFamilia() {
+
+            window.location.href =
+                "historial.html";
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NorApp | Historial</title>
+
+    <link rel="stylesheet" href="../css/estilo.css">
+
+    <style>
+
+        /* ==============================
+           CERRAR SESIÓN
+        ============================== */
+
+        .cerrar-sesion {
+            margin-top: 15px !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+            padding-top: 15px !important;
+        }
+
+        .cerrar-sesion:hover {
+            background: #C62828 !important;
+            color: #FFFFFF !important;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- =====================================
+         MENÚ
+         ===================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h1>NorApp</h1>
+
+            <p>
+                Asistencia y cuidado
+            </p>
+
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="../index.html">
+                🏠 Inicio
+            </a>
+
+            <a href="perfil.html">
+                👤 Perfil
+            </a>
+
+            <a href="salud.html">
+                ❤️ Salud
+            </a>
+
+            <a href="caidas.html">
+                🚨 Detección de caídas
+            </a>
+
+            <a href="ubicacion.html">
+                📍 Ubicación
+            </a>
+
+            <a href="recordatorios.html">
+                💊 Recordatorios
+            </a>
+
+            <a href="alertas.html">
+                🔔 Alertas
+            </a>
+
+            <a href="asistente.html">
+                🤖 Asistente
+            </a>
+
+            <a href="familia.html">
+                👨‍👩‍👧 Familia
+            </a>
+
+            <a href="historial.html" class="activo">
+                📋 Historial
+            </a>
+
+            <a href="configuracion.html">
+                ⚙️ Configuración
+            </a>
+
+
+            <!-- ==============================
+                 CERRAR SESIÓN
+            ============================== -->
+
+            <a
+                href="#"
+                onclick="cerrarSesion(); return false;"
+                class="cerrar-sesion"
+            >
+                🚪 Cerrar sesión
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- =====================================
+         CONTENIDO
+         ===================================== -->
+
+    <main class="main">
+
+
+        <!-- ENCABEZADO -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h2>
+                    📋 Historial
+                </h2>
+
+                <p>
+                    Registro de las actividades realizadas en NorApp
+                </p>
+
+            </div>
+
+
+            <div class="usuario">
+
+                👤 <span id="nombreHistorial">
+                    Usuario
+                </span>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================
+             RESUMEN
+             ===================================== -->
+
+        <section class="cards">
+
+
+            <div class="card">
+
+                <h3>
+                    🚨 Caídas
+                </h3>
+
+                <div
+                    class="numero"
+                    id="historialCaidas"
+                >
+                    0
+                </div>
+
+                <p>
+                    Situaciones registradas
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    ❤️ Salud
+                </h3>
+
+                <div
+                    class="numero"
+                    id="historialSalud"
+                >
+                    0
+                </div>
+
+                <p>
+                    Mediciones registradas
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    💊 Medicamentos
+                </h3>
+
+                <div
+                    class="numero"
+                    id="historialMedicamentos"
+                >
+                    0
+                </div>
+
+                <p>
+                    Registros realizados
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    🤖 Asistente
+                </h3>
+
+                <div
+                    class="numero"
+                    id="historialAsistente"
+                >
+                    0
+                </div>
+
+                <p>
+                    Interacciones registradas
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             ACTIVIDAD DE CAÍDAS
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                🚨 Detección de caídas
+            </h3>
+
+            <div id="registroCaida">
+
+                <p>
+                    No existen registros de caídas
+                    en este momento.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             ACTIVIDAD DE SALUD
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                ❤️ Registros de salud
+            </h3>
+
+            <div id="registroSalud">
+
+                <p>
+                    No existen mediciones registradas
+                    en este momento.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             ACTIVIDAD DE MEDICAMENTOS
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                💊 Medicamentos
+            </h3>
+
+            <div id="registroMedicamento">
+
+                <p>
+                    No existen medicamentos registrados
+                    como tomados.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             ACTIVIDAD DEL ASISTENTE
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                🤖 Asistente
+            </h3>
+
+            <div id="registroAsistente">
+
+                <p>
+                    No existen interacciones registradas
+                    con el asistente.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             ACTIVIDAD GENERAL
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                🕐 Actividad reciente
+            </h3>
+
+            <div id="actividadGeneral">
+
+                <div class="item">
+
+                    <strong>
+                        📋 Historial preparado
+                    </strong>
+
+                    <p>
+                        NorApp está listo para registrar
+                        las actividades realizadas.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             NAVEGACIÓN
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                🔗 Accesos rápidos
+            </h3>
+
+            <p>
+                Puedes revisar las diferentes funciones
+                de NorApp desde aquí.
+            </p>
+
+            <div class="botones">
+
+
+                <a href="salud.html">
+
+                    <button class="btn">
+                        ❤️ Ver salud
+                    </button>
+
+                </a>
+
+
+                <a href="caidas.html">
+
+                    <button class="btn">
+                        🚨 Ver caídas
+                    </button>
+
+                </a>
+
+
+                <a href="recordatorios.html">
+
+                    <button class="btn">
+                        💊 Ver medicamentos
+                    </button>
+
+                </a>
+
+
+                <a href="asistente.html">
+
+                    <button class="btn">
+                        🤖 Abrir asistente
+                    </button>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             INFORMACIÓN
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                ℹ️ Sobre el historial
+            </h3>
+
+            <p>
+                El historial permite visualizar las
+                actividades realizadas dentro del
+                prototipo NorApp.
+            </p>
+
+            <p>
+                Los registros mostrados en esta versión
+                se almacenan localmente en el navegador.
+            </p>
+
+            <div class="aviso">
+
+                <strong>
+                    ⚠️ Prototipo escolar
+                </strong>
+
+                <p>
+                    La información presentada corresponde
+                    a una demostración del funcionamiento
+                    de NorApp.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================
+         JAVASCRIPT
+         ===================================== -->
+
+    <script src="../js/app.js"></script>
+
+
+    <script>
+
+        /*
+         * =====================================
+         * ACTUALIZAR HISTORIAL
+         * =====================================
+         */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                actualizarHistorial();
+
+
+                /* ==============================
+                   MOSTRAR USUARIO
+                ============================== */
+
+                const nombre =
+                    localStorage.getItem(
+                        "norappUsuario"
+                    );
+
+                const nombreHistorial =
+                    document.getElementById(
+                        "nombreHistorial"
+                    );
+
+
+                if (
+                    nombre &&
+                    nombreHistorial
+                ) {
+
+                    nombreHistorial.textContent =
+                        nombre;
+
+                }
+
+            }
+        );
+
+
+
+        function actualizarHistorial() {
+
+
+            /* ================================
+               CAÍDAS
+               ================================= */
+
+            const caida =
+                localStorage.getItem(
+                    "norappAlerta"
+                );
+
+            const fechaCaida =
+                localStorage.getItem(
+                    "norappFechaAlerta"
+                );
+
+            const contadorCaidas =
+                document.getElementById(
+                    "historialCaidas"
+                );
+
+            const registroCaida =
+                document.getElementById(
+                    "registroCaida"
+                );
+
+
+            if (caida === "caida") {
+
+                contadorCaidas.textContent = "1";
+
+                registroCaida.innerHTML = `
+
+                    <div class="item">
+
+                        <strong>
+                            🚨 Posible caída registrada
+                        </strong>
+
+                        <p>
+                            Se activó el protocolo de
+                            atención de NorApp.
+                        </p>
+
+                        <p>
+                            🕐 ${
+                                fechaCaida
+                                ? fechaCaida
+                                : "Fecha pendiente"
+                            }
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+
+
+            /* ================================
+               SALUD
+               ================================= */
+
+            const salud =
+                localStorage.getItem(
+                    "norappSalud"
+                );
+
+            const fechaSalud =
+                localStorage.getItem(
+                    "norappFechaSalud"
+                );
+
+            const frecuencia =
+                localStorage.getItem(
+                    "norappFrecuencia"
+                );
+
+            const saturacion =
+                localStorage.getItem(
+                    "norappSaturacion"
+                );
+
+            const temperatura =
+                localStorage.getItem(
+                    "norappTemperatura"
+                );
+
+
+            const contadorSalud =
+                document.getElementById(
+                    "historialSalud"
+                );
+
+            const registroSalud =
+                document.getElementById(
+                    "registroSalud"
+                );
+
+
+            if (salud === "registrado") {
+
+                contadorSalud.textContent = "1";
+
+                registroSalud.innerHTML = `
+
+                    <div class="item">
+
+                        <strong>
+                            ❤️ Medición registrada
+                        </strong>
+
+                        <p>
+                            ❤️ Frecuencia:
+                            ${frecuencia || "No disponible"}
+                        </p>
+
+                        <p>
+                            🫁 Saturación:
+                            ${saturacion || "No disponible"}
+                        </p>
+
+                        <p>
+                            🌡️ Temperatura:
+                            ${temperatura || "No disponible"}
+                        </p>
+
+                        <p>
+                            🕐 ${
+                                fechaSalud
+                                ? fechaSalud
+                                : "Fecha pendiente"
+                            }
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+
+
+            /* ================================
+               MEDICAMENTO
+               ================================= */
+
+            const medicamento =
+                localStorage.getItem(
+                    "norappMedicamento"
+                );
+
+            const fechaMedicamento =
+                localStorage.getItem(
+                    "norappFechaMedicamento"
+                );
+
+
+            const contadorMedicamentos =
+                document.getElementById(
+                    "historialMedicamentos"
+                );
+
+            const registroMedicamento =
+                document.getElementById(
+                    "registroMedicamento"
+                );
+
+
+            if (medicamento === "tomado") {
+
+                contadorMedicamentos.textContent = "1";
+
+                registroMedicamento.innerHTML = `
+
+                    <div class="item">
+
+                        <strong>
+                            💊 Medicamento confirmado
+                        </strong>
+
+                        <p>
+                            El medicamento fue marcado
+                            como tomado.
+                        </p>
+
+                        <p>
+                            🕐 ${
+                                fechaMedicamento
+                                ? fechaMedicamento
+                                : "Fecha pendiente"
+                            }
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+
+
+            /* ================================
+               ASISTENTE
+               ================================= */
+
+            const asistente =
+                localStorage.getItem(
+                    "norappAsistente"
+                );
+
+            const fechaAsistente =
+                localStorage.getItem(
+                    "norappFechaAsistente"
+                );
+
+
+            const contadorAsistente =
+                document.getElementById(
+                    "historialAsistente"
+                );
+
+            const registroAsistente =
+                document.getElementById(
+                    "registroAsistente"
+                );
+
+
+            if (asistente === "ayuda") {
+
+                contadorAsistente.textContent = "1";
+
+                registroAsistente.innerHTML = `
+
+                    <div class="item">
+
+                        <strong>
+                            🤖 Solicitud de ayuda
+                        </strong>
+
+                        <p>
+                            El asistente registró
+                            una solicitud de ayuda.
+                        </p>
+
+                        <p>
+                            🕐 ${
+                                fechaAsistente
+                                ? fechaAsistente
+                                : "Fecha pendiente"
+                            }
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+
+
+            /* ================================
+               ACTIVIDAD GENERAL
+               ================================= */
+
+            const actividadGeneral =
+                document.getElementById(
+                    "actividadGeneral"
+                );
+
+            let actividades = [];
+
+
+
+            if (caida === "caida") {
+
+                actividades.push(`
+
+                    <div class="item">
+
+                        🚨 Posible caída registrada
+
+                    </div>
+
+                `);
+
+            }
+
+
+
+            if (salud === "registrado") {
+
+                actividades.push(`
+
+                    <div class="item">
+
+                        ❤️ Medición de salud registrada
+
+                    </div>
+
+                `);
+
+            }
+
+
+
+            if (medicamento === "tomado") {
+
+                actividades.push(`
+
+                    <div class="item">
+
+                        💊 Medicamento confirmado
+
+                    </div>
+
+                `);
+
+            }
+
+
+
+            if (asistente === "ayuda") {
+
+                actividades.push(`
+
+                    <div class="item">
+
+                        🤖 Solicitud de ayuda registrada
+
+                    </div>
+
+                `);
+
+            }
+
+
+
+            if (actividades.length > 0) {
+
+                actividadGeneral.innerHTML =
+                    actividades.join("");
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

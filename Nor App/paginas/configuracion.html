@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Configuración - NorApp</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/estilo.css"
+    >
+
+    <style>
+
+        /* =====================================
+           CERRAR SESIÓN
+           ===================================== */
+
+        .cerrar-sesion {
+            margin-top: 15px !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+            padding-top: 15px !important;
+        }
+
+        .cerrar-sesion:hover {
+            background: #C62828 !important;
+            color: #FFFFFF !important;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================
+         MENÚ LATERAL
+         ===================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h1>NorApp</h1>
+
+            <p>
+                Bienestar y acompañamiento
+            </p>
+
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="../index.html">
+                🏠 Inicio
+            </a>
+
+            <a href="perfil.html">
+                👤 Perfil
+            </a>
+
+            <a href="salud.html">
+                ❤️ Salud
+            </a>
+
+            <a href="caidas.html">
+                ⚠️ Caídas
+            </a>
+
+            <a href="ubicacion.html">
+                📍 Ubicación
+            </a>
+
+            <a href="recordatorios.html">
+                💊 Recordatorios
+            </a>
+
+            <a href="alertas.html">
+                🚨 Alertas
+            </a>
+
+            <a href="asistente.html">
+                🤖 Asistente
+            </a>
+
+            <a href="familia.html">
+                👨‍👩‍👧 Familia
+            </a>
+
+            <a href="historial.html">
+                📋 Historial
+            </a>
+
+            <a href="configuracion.html">
+                ⚙️ Configuración
+            </a>
+
+
+            <!-- =====================================
+                 CERRAR SESIÓN
+                 ===================================== -->
+
+            <a
+                href="#"
+                onclick="cerrarSesion(); return false;"
+                class="cerrar-sesion"
+            >
+                🚪 Cerrar sesión
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- =====================================
+         CONTENIDO PRINCIPAL
+         ===================================== -->
+
+    <main class="main">
+
+
+        <!-- =====================================
+             ENCABEZADO
+             ===================================== -->
+
+        <div class="topbar">
+
+            <div>
+
+                <h2>
+                    ⚙️ Configuración
+                </h2>
+
+                <p>
+                    Personaliza el funcionamiento de NorApp
+                </p>
+
+            </div>
+
+
+            <div
+                class="usuario"
+                id="usuarioConfiguracion"
+            >
+
+                👤 Usuario
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             RESUMEN
+             ===================================== -->
+
+        <section class="cards">
+
+
+            <div class="card">
+
+                <h3>
+                    🔔 Notificaciones
+                </h3>
+
+                <div class="numero">
+                    Activas
+                </div>
+
+                <p>
+                    Avisos importantes
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    📍 Ubicación
+                </h3>
+
+                <div class="numero">
+                    Activa
+                </div>
+
+                <p>
+                    Para situaciones de emergencia
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    🤖 Asistente
+                </h3>
+
+                <div class="numero">
+                    Activo
+                </div>
+
+                <p>
+                    Acompañamiento y ayuda
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    🔐 Seguridad
+                </h3>
+
+                <div class="numero">
+                    Protegida
+                </div>
+
+                <p>
+                    Configuración de seguridad
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             NOTIFICACIONES
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                🔔 Notificaciones
+            </h3>
+
+            <p>
+
+                Configura si NorApp puede mostrar avisos
+                relacionados con medicamentos, alertas
+                y situaciones importantes.
+
+            </p>
+
+
+            <label
+                style="
+                    display:block;
+                    margin:18px 0;
+                    font-size:1.1rem;
+                "
+            >
+
+                <input
+                    type="checkbox"
+                    id="notificaciones"
+                    checked
+                >
+
+                Recibir notificaciones importantes
+
+            </label>
+
+
+
+            <label
+                style="
+                    display:block;
+                    margin:18px 0;
+                    font-size:1.1rem;
+                "
+            >
+
+                <input
+                    type="checkbox"
+                    id="notificacionesMedicamentos"
+                    checked
+                >
+
+                Recibir recordatorios de medicamentos
+
+            </label>
+
+        </section>
+
+
+
+        <!-- =====================================
+             UBICACIÓN
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                📍 Ubicación
+            </h3>
+
+            <p>
+
+                La ubicación puede utilizarse dentro
+                del prototipo para representar dónde
+                se encuentra el adulto mayor durante
+                una situación de emergencia.
+
+            </p>
+
+
+            <label
+                style="
+                    display:block;
+                    margin:18px 0;
+                    font-size:1.1rem;
+                "
+            >
+
+                <input
+                    type="checkbox"
+                    id="ubicacion"
+                    checked
+                >
+
+                Permitir el uso de ubicación
+
+            </label>
+
+        </section>
+
+
+
+        <!-- =====================================
+             ASISTENTE
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                🤖 Asistente NorApp
+            </h3>
+
+            <p>
+
+                El asistente permite simular
+                conversaciones de ayuda,
+                recordatorios y acompañamiento
+                para el adulto mayor.
+
+            </p>
+
+
+            <label
+                style="
+                    display:block;
+                    margin:18px 0;
+                    font-size:1.1rem;
+                "
+            >
+
+                <input
+                    type="checkbox"
+                    id="asistente"
+                    checked
+                >
+
+                Mantener asistente activo
+
+            </label>
+
+        </section>
+
+
+
+        <!-- =====================================
+             SEGURIDAD
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                🔐 Seguridad y emergencias
+            </h3>
+
+            <p>
+
+                Estas opciones representan las
+                funciones de seguridad que NorApp
+                utilizaría durante una situación
+                de emergencia.
+
+            </p>
+
+
+            <label
+                style="
+                    display:block;
+                    margin:18px 0;
+                    font-size:1.1rem;
+                "
+            >
+
+                <input
+                    type="checkbox"
+                    id="seguridad"
+                    checked
+                >
+
+                Activar protocolo de emergencia
+
+            </label>
+
+
+
+            <label
+                style="
+                    display:block;
+                    margin:18px 0;
+                    font-size:1.1rem;
+                "
+            >
+
+                <input
+                    type="checkbox"
+                    id="contactoEmergencia"
+                    checked
+                >
+
+                Avisar al contacto familiar configurado
+
+            </label>
+
+        </section>
+
+
+
+        <!-- =====================================
+             GUARDAR CONFIGURACIÓN
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                💾 Guardar configuración
+            </h3>
+
+            <p>
+
+                Guarda las preferencias seleccionadas
+                para el funcionamiento del prototipo
+                de NorApp.
+
+            </p>
+
+
+            <button
+                class="btn"
+                onclick="guardarConfiguracion()"
+            >
+
+                💾 Guardar cambios
+
+            </button>
+
+
+            <div
+                id="mensajeConfiguracion"
+                class="mensaje"
+            ></div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             EXPLICACIÓN
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                ℹ️ Sobre esta configuración
+            </h3>
+
+            <p>
+
+                Esta sección permite representar cómo
+                el usuario podría controlar las principales
+                funciones de NorApp desde un solo lugar.
+
+            </p>
+
+            <p>
+
+                Las opciones están diseñadas para que
+                el usuario pueda activar o desactivar
+                funciones importantes de manera sencilla.
+
+            </p>
+
+        </section>
+
+
+
+        <!-- =====================================
+             ENLACES
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                🔗 Otras funciones
+            </h3>
+
+
+            <p>
+
+                <a href="perfil.html">
+                    👤 Ver perfil
+                </a>
+
+            </p>
+
+
+            <p>
+
+                <a href="familia.html">
+                    👨‍👩‍👧 Contacto familiar
+                </a>
+
+            </p>
+
+
+            <p>
+
+                <a href="alertas.html">
+                    🚨 Ver alertas
+                </a>
+
+            </p>
+
+
+            <p>
+
+                <a href="historial.html">
+                    📋 Ver historial
+                </a>
+
+            </p>
+
+        </section>
+
+
+
+        <!-- =====================================
+             AVISO
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                ⚠️ Prototipo escolar
+            </h3>
+
+            <p>
+
+                NorApp es un prototipo desarrollado
+                para representar una posible solución
+                tecnológica.
+
+                Las funciones de ubicación,
+                inteligencia artificial,
+                monitoreo de salud y contacto
+                de emergencia todavía corresponden
+                a simulaciones dentro del prototipo web.
+
+            </p>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================
+         JAVASCRIPT PRINCIPAL
+         ===================================== -->
+
+    <script src="../js/app.js"></script>
+
+
+
+    <!-- =====================================
+         PERSONALIZACIÓN DEL NOMBRE
+         ===================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const nombre =
+                    localStorage.getItem(
+                        "norappUsuario"
+                    );
+
+
+                const usuarioConfiguracion =
+                    document.getElementById(
+                        "usuarioConfiguracion"
+                    );
+
+
+                if (
+                    nombre &&
+                    usuarioConfiguracion
+                ) {
+
+                    usuarioConfiguracion.textContent =
+                        "👤 " + nombre;
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

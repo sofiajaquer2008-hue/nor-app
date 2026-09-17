@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mi perfil - NorApp</title>
+
+    <!-- CSS GENERAL -->
+    <link rel="stylesheet" href="../css/estilo.css">
+
+    <style>
+
+        /* =====================================================
+           PERFIL NORAPP
+        ===================================================== */
+
+        .perfil-page {
+            margin-left: 280px;
+            width: calc(100% - 280px);
+            min-height: 100vh;
+            padding: 35px;
+            box-sizing: border-box;
+            color: #172B3A;
+        }
+
+        .perfil-page *,
+        .perfil-page *::before,
+        .perfil-page *::after {
+            box-sizing: border-box;
+        }
+
+
+        /* =====================================================
+           ENCABEZADO
+        ===================================================== */
+
+        .perfil-encabezado {
+            margin-bottom: 28px;
+        }
+
+        .perfil-etiqueta {
+            display: inline-block;
+            margin-bottom: 8px;
+            color: #1976D2;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .perfil-encabezado h1 {
+            margin: 0 0 8px;
+            color: #0B3C5D;
+            font-size: 36px;
+            line-height: 1.2;
+        }
+
+        .perfil-encabezado p {
+            margin: 0;
+            color: #536471;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           TARJETAS
+        ===================================================== */
+
+        .perfil-tarjeta {
+            width: 100%;
+            background: #FFFFFF;
+            border-radius: 18px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+        }
+
+
+        /* =====================================================
+           PERFIL PRINCIPAL
+        ===================================================== */
+
+        .perfil-principal {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            padding: 30px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            min-width: 100px;
+            border-radius: 50%;
+            background: linear-gradient(
+                135deg,
+                #1976D2,
+                #009688
+            );
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(25, 118, 210, 0.25);
+        }
+
+        .datos-principales {
+            min-width: 0;
+        }
+
+        .datos-principales .pequeno {
+            display: block;
+            margin-bottom: 5px;
+            color: #1976D2;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .datos-principales h2 {
+            margin: 0 0 7px;
+            color: #172B3A;
+            font-size: 30px;
+        }
+
+        .datos-principales p {
+            margin: 4px 0;
+            color: #536471;
+            font-size: 18px;
+        }
+
+
+        /* =====================================================
+           TÍTULOS DE SECCIÓN
+        ===================================================== */
+
+        .titulo-seccion {
+            margin: 35px 0 18px;
+        }
+
+        .titulo-seccion h2 {
+            margin: 0 0 5px;
+            color: #0B3C5D;
+            font-size: 25px;
+        }
+
+        .titulo-seccion p {
+            margin: 0;
+            color: #667784;
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           INFORMACIÓN PERSONAL
+        ===================================================== */
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .dato-card {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 22px;
+        }
+
+        .dato-card > div {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            min-width: 0;
+        }
+
+        .dato-card span:not(.icono-card) {
+            color: #667784;
+            font-size: 15px;
+        }
+
+        .dato-card strong {
+            color: #172B3A;
+            font-size: 20px;
+        }
+
+
+        /* =====================================================
+           ICONOS
+        ===================================================== */
+
+        .icono-card {
+            width: 55px;
+            height: 55px;
+            min-width: 55px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+        }
+
+        .icono-card.azul {
+            background: #E3F2FD;
+        }
+
+        .icono-card.verde {
+            background: #E9F7EE;
+        }
+
+        .icono-card.amarillo {
+            background: #FFF5D9;
+        }
+
+        .icono-card.rojo {
+            background: #FDEAEA;
+        }
+
+        .icono-card.turquesa {
+            background: #E5F7F7;
+        }
+
+
+        /* =====================================================
+           CONTACTO DE EMERGENCIA
+        ===================================================== */
+
+        .contacto-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 25px;
+        }
+
+        .contacto-avatar {
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            border-radius: 50%;
+            background: #E3F2FD;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .contacto-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .contacto-info > span {
+            color: #1976D2;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .contacto-info h3 {
+            margin: 5px 0;
+            color: #172B3A;
+            font-size: 21px;
+        }
+
+        .contacto-info p {
+            margin: 0;
+            color: #536471;
+            font-size: 17px;
+        }
+
+        .estado-verde {
+            padding: 9px 14px;
+            border-radius: 20px;
+            background: #E9F7EE;
+            color: #287D4A;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           FUNCIONES ACTIVAS
+        ===================================================== */
+
+        .funcion-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .funcion-card > div {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .funcion-card strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #172B3A;
+            font-size: 18px;
+        }
+
+        .funcion-card p {
+            margin: 0;
+            color: #667784;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .estado-activo {
+            padding: 7px 12px;
+            border-radius: 15px;
+            background: #E9F7EE;
+            color: #287D4A;
+            font-size: 13px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           RECORDATORIOS
+        ===================================================== */
+
+        .recordatorio-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 25px;
+        }
+
+        .recordatorio-icono {
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            border-radius: 15px;
+            background: #FFF5D9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        .recordatorio-texto {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .recordatorio-texto strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #172B3A;
+            font-size: 20px;
+        }
+
+        .recordatorio-texto p {
+            margin: 0;
+            color: #667784;
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           BOTONES
+        ===================================================== */
+
+        .boton-secundario,
+        .boton-principal {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 13px 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .boton-secundario {
+            background: #FFF5D9;
+            color: #6D4C00;
+        }
+
+        .boton-principal {
+            background: #1976D2;
+            color: #FFFFFF;
+        }
+
+        .boton-secundario:hover,
+        .boton-principal:hover {
+            transform: translateY(-1px);
+            opacity: 0.9;
+        }
+
+
+        /* =====================================================
+           CONFIGURACIÓN
+        ===================================================== */
+
+        .configuracion-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+            padding: 28px;
+            background: linear-gradient(
+                135deg,
+                #E3F2FD,
+                #E5F7F7
+            );
+        }
+
+        .configuracion-info .pequeno {
+            color: #1976D2;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .configuracion-info h2 {
+            margin: 7px 0;
+            color: #172B3A;
+        }
+
+        .configuracion-info p {
+            margin: 0;
+            color: #536471;
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           AVISO DE PROTOTIPO
+        ===================================================== */
+
+        .aviso-prototipo {
+            margin-top: 35px;
+            padding: 20px;
+            border-left: 5px solid #1976D2;
+            border-radius: 12px;
+            background: #F4F8FB;
+        }
+
+        .aviso-prototipo strong {
+            color: #0B3C5D;
+            font-size: 17px;
+        }
+
+        .aviso-prototipo p {
+            margin: 8px 0 0;
+            color: #536471;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           CERRAR SESIÓN
+        ===================================================== */
+
+        .cerrar-sesion {
+            margin-top: 15px !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+            padding-top: 15px !important;
+        }
+
+        .cerrar-sesion:hover {
+            background: #C62828 !important;
+            color: #FFFFFF !important;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .perfil-page {
+                margin-left: 240px;
+                width: calc(100% - 240px);
+                padding: 30px;
+            }
+
+        }
+
+
+        @media (max-width: 800px) {
+
+            .grid-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .contacto-card {
+                align-items: flex-start;
+                flex-wrap: wrap;
+            }
+
+            .estado-verde {
+                width: 100%;
+                text-align: center;
+            }
+
+            .recordatorio-info {
+                flex-wrap: wrap;
+            }
+
+            .recordatorio-info .boton-secundario {
+                width: 100%;
+            }
+
+            .configuracion-info {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .configuracion-info .boton-principal {
+                width: 100%;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .perfil-page {
+                margin-left: 0;
+                width: 100%;
+                padding: 20px;
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .perfil-principal {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .avatar {
+                width: 85px;
+                height: 85px;
+                min-width: 85px;
+                font-size: 35px;
+            }
+
+            .datos-principales h2 {
+                font-size: 25px;
+            }
+
+            .perfil-encabezado h1 {
+                font-size: 30px;
+            }
+
+            .dato-card,
+            .funcion-card {
+                padding: 18px;
+            }
+
+        }
+
+
+        @media (max-width: 420px) {
+
+            .perfil-page {
+                padding: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+    <!-- =====================================================
+         MENÚ LATERAL
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                N
+            </div>
+
+            <div>
+                <strong>NorApp</strong>
+                <span>Bienestar y cuidado</span>
+            </div>
+
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="../index.html">
+                🏠 Inicio
+            </a>
+
+            <a href="perfil.html" class="activo">
+                👤 Mi perfil
+            </a>
+
+            <a href="salud.html">
+                ❤️ Salud
+            </a>
+
+            <a href="recordatorios.html">
+                💊 Recordatorios
+            </a>
+
+            <a href="asistente.html">
+                🤖 Asistente
+            </a>
+
+            <a href="ubicacion.html">
+                📍 Ubicación
+            </a>
+
+            <a href="caidas.html">
+                ⚠️ Caídas
+            </a>
+
+            <a href="familia.html">
+                👨‍👩‍👧 Familia
+            </a>
+
+            <a href="alertas.html">
+                🚨 Alertas
+            </a>
+
+            <a href="historial.html">
+                📋 Historial
+            </a>
+
+            <a href="configuracion.html">
+                ⚙️ Configuración
+            </a>
+
+            <!-- =================================================
+                 CERRAR SESIÓN
+            ================================================== -->
+
+            <a
+                href="#"
+                onclick="cerrarSesion(); return false;"
+                class="cerrar-sesion"
+            >
+                🚪 Cerrar sesión
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="perfil-page">
+
+
+        <!-- ENCABEZADO -->
+
+        <header class="perfil-encabezado">
+
+            <span class="perfil-etiqueta">
+                NORAPP
+            </span>
+
+            <h1>
+                Mi perfil
+            </h1>
+
+            <p>
+                Aquí puedes consultar la información de la persona
+                que utiliza NorApp.
+            </p>
+
+        </header>
+
+
+        <!-- =================================================
+             PERFIL PRINCIPAL
+        ================================================== -->
+
+        <section class="perfil-tarjeta perfil-principal">
+
+            <div
+                class="avatar"
+                id="avatarUsuario"
+            >
+                U
+            </div>
+
+
+            <div class="datos-principales">
+
+                <span class="pequeno">
+                    USUARIO DE NORAPP
+                </span>
+
+                <h2 id="nombrePerfil">
+                    Usuario
+                </h2>
+
+                <p id="edadPerfil">
+                    Edad no registrada
+                </p>
+
+                <p id="ciudadPerfil">
+                    Ciudad no registrada
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             INFORMACIÓN PERSONAL
+        ================================================== -->
+
+        <section>
+
+            <div class="titulo-seccion">
+
+                <h2>
+                    Información personal
+                </h2>
+
+                <p>
+                    Datos registrados al configurar NorApp.
+                </p>
+
+            </div>
+
+
+            <div class="grid-cards">
+
+
+                <div class="perfil-tarjeta dato-card">
+
+                    <span class="icono-card azul">
+                        🎂
+                    </span>
+
+                    <div>
+
+                        <span>
+                            Edad
+                        </span>
+
+                        <strong id="edadPerfilCard">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="perfil-tarjeta dato-card">
+
+                    <span class="icono-card azul">
+                        📍
+                    </span>
+
+                    <div>
+
+                        <span>
+                            Ciudad
+                        </span>
+
+                        <strong id="ciudadPerfilCard">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="perfil-tarjeta dato-card">
+
+                    <span class="icono-card verde">
+                        🛡️
+                    </span>
+
+                    <div>
+
+                        <span>
+                            Protección
+                        </span>
+
+                        <strong>
+                            Activa
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="perfil-tarjeta dato-card">
+
+                    <span class="icono-card amarillo">
+                        💊
+                    </span>
+
+                    <div>
+
+                        <span>
+                            Recordatorios
+                        </span>
+
+                        <strong>
+                            Activos
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CONTACTO DE EMERGENCIA
+        ================================================== -->
+
+        <section>
+
+            <div class="titulo-seccion">
+
+                <h2>
+                    Contacto de emergencia
+                </h2>
+
+                <p>
+                    Persona que puede ser avisada cuando sea necesario.
+                </p>
+
+            </div>
+
+
+            <div class="perfil-tarjeta contacto-card">
+
+                <div class="contacto-avatar">
+                    👤
+                </div>
+
+
+                <div class="contacto-info">
+
+                    <span>
+                        CONTACTO PRINCIPAL
+                    </span>
+
+                    <h3 id="nombreContactoPerfil">
+                        No registrado
+                    </h3>
+
+                    <p id="telefonoContactoPerfil">
+                        Teléfono no registrado
+                    </p>
+
+                </div>
+
+
+                <div class="estado-verde">
+                    ● Registrado
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FUNCIONES
+        ================================================== -->
+
+        <section>
+
+            <div class="titulo-seccion">
+
+                <h2>
+                    Funciones activas
+                </h2>
+
+                <p>
+                    Servicios disponibles en el prototipo NorApp.
+                </p>
+
+            </div>
+
+
+            <div class="grid-cards">
+
+
+                <div class="perfil-tarjeta funcion-card">
+
+                    <span class="icono-card verde">
+                        ❤️
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Monitoreo de salud
+                        </strong>
+
+                        <p>
+                            Seguimiento de signos registrados.
+                        </p>
+
+                    </div>
+
+                    <span class="estado-activo">
+                        Activo
+                    </span>
+
+                </div>
+
+
+                <div class="perfil-tarjeta funcion-card">
+
+                    <span class="icono-card rojo">
+                        🚨
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Alertas
+                        </strong>
+
+                        <p>
+                            Protocolo de emergencia disponible.
+                        </p>
+
+                    </div>
+
+                    <span class="estado-activo">
+                        Activo
+                    </span>
+
+                </div>
+
+
+                <div class="perfil-tarjeta funcion-card">
+
+                    <span class="icono-card turquesa">
+                        🤖
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Asistente
+                        </strong>
+
+                        <p>
+                            Asistencia mediante conversación.
+                        </p>
+
+                    </div>
+
+                    <span class="estado-activo">
+                        Activo
+                    </span>
+
+                </div>
+
+
+                <div class="perfil-tarjeta funcion-card">
+
+                    <span class="icono-card azul">
+                        📍
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Ubicación
+                        </strong>
+
+                        <p>
+                            Ubicación disponible para el sistema.
+                        </p>
+
+                    </div>
+
+                    <span class="estado-activo">
+                        Activo
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RECORDATORIOS
+        ================================================== -->
+
+        <section>
+
+            <div class="titulo-seccion">
+
+                <h2>
+                    Recordatorios
+                </h2>
+
+                <p>
+                    Control de medicamentos y tareas importantes.
+                </p>
+
+            </div>
+
+
+            <div class="perfil-tarjeta recordatorio-info">
+
+                <div class="recordatorio-icono">
+                    💊
+                </div>
+
+
+                <div class="recordatorio-texto">
+
+                    <strong>
+                        Medicamentos
+                    </strong>
+
+                    <p>
+                        NorApp puede recordar cuándo tomar un medicamento
+                        y registrar si fue tomado.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="recordatorios.html"
+                    class="boton-secundario"
+                >
+                    Ver recordatorios
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CONFIGURACIÓN
+        ================================================== -->
+
+        <section>
+
+            <div class="perfil-tarjeta configuracion-info">
+
+                <div>
+
+                    <span class="pequeno">
+                        CONFIGURACIÓN
+                    </span>
+
+                    <h2>
+                        ¿Quieres cambiar tus preferencias?
+                    </h2>
+
+                    <p>
+                        Puedes modificar las funciones y permisos
+                        de NorApp desde la sección de configuración.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="configuracion.html"
+                    class="boton-principal"
+                >
+                    ⚙️ Configuración
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             AVISO
+        ================================================== -->
+
+        <div class="aviso-prototipo">
+
+            <strong>
+                ℹ️ Prototipo NorApp
+            </strong>
+
+            <p>
+                Esta versión corresponde a un prototipo funcional.
+                Algunas funciones, como GPS, inteligencia artificial,
+                detección de caídas y medición de salud, están simuladas
+                para demostrar el funcionamiento del proyecto.
+            </p>
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     DATOS DEL USUARIO
+========================================================= -->
+
+<script>
+
+    /*
+       NorApp guarda los datos del usuario en localStorage.
+       Esta página solamente los lee y los muestra.
+    */
+
+    const nombre =
+        localStorage.getItem("norappUsuario");
+
+    const edad =
+        localStorage.getItem("norappEdad");
+
+    const ciudad =
+        localStorage.getItem("norappCiudad");
+
+    const contacto =
+        localStorage.getItem("norappContacto");
+
+    const telefono =
+        localStorage.getItem("norappTelefono");
+
+
+    /* =====================================================
+       NOMBRE
+    ===================================================== */
+
+    if (nombre && nombre.trim() !== "") {
+
+        document.getElementById("nombrePerfil").textContent =
+            nombre;
+
+        document.getElementById("avatarUsuario").textContent =
+            nombre.trim().charAt(0).toUpperCase();
+
+    }
+
+
+    /* =====================================================
+       EDAD
+    ===================================================== */
+
+    if (edad && edad.trim() !== "") {
+
+        document.getElementById("edadPerfil").textContent =
+            edad + " años";
+
+        document.getElementById("edadPerfilCard").textContent =
+            edad + " años";
+
+    }
+
+
+    /* =====================================================
+       CIUDAD
+    ===================================================== */
+
+    if (ciudad && ciudad.trim() !== "") {
+
+        document.getElementById("ciudadPerfil").textContent =
+            ciudad;
+
+        document.getElementById("ciudadPerfilCard").textContent =
+            ciudad;
+
+    }
+
+
+    /* =====================================================
+       CONTACTO
+    ===================================================== */
+
+    if (contacto && contacto.trim() !== "") {
+
+        document.getElementById("nombreContactoPerfil").textContent =
+            contacto;
+
+    }
+
+
+    /* =====================================================
+       TELÉFONO
+    ===================================================== */
+
+    if (telefono && telefono.trim() !== "") {
+
+        document.getElementById("telefonoContactoPerfil").textContent =
+            telefono;
+
+    }
+
+</script>
+
+
+<!-- =========================================================
+     JAVASCRIPT GENERAL DE NORAPP
+========================================================= -->
+
+<script src="../js/app.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NorApp | Detección de caídas</title>
+
+    <link rel="stylesheet" href="../css/estilo.css">
+
+    <style>
+        /* ==============================
+           PÁGINA DE CAÍDAS
+        ============================== */
+
+        .caida-hero {
+            background: linear-gradient(135deg, #FFF5D9, #FDEAEA);
+            border-left: 6px solid #C62828;
+            border-radius: 18px;
+            padding: 28px;
+            margin-bottom: 25px;
+        }
+
+        .caida-hero h2 {
+            margin: 0 0 10px;
+            color: #172B3A;
+            font-size: 27px;
+        }
+
+        .caida-hero p {
+            margin: 0;
+            color: #536471;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        /* TARJETAS */
+
+        .estado-caida-card {
+            border-top: 5px solid #287D4A;
+        }
+
+        .sensor-card {
+            border-top: 5px solid #145DA0;
+        }
+
+        .alerta-card {
+            border-top: 5px solid #C62828;
+        }
+
+        .contacto-card-caida {
+            border-top: 5px solid #168C8C;
+        }
+
+        /* PROTOCOLO */
+
+        .pasos-protocolo {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .paso-caida {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 18px;
+            background: #F4F8FB;
+            border-radius: 14px;
+        }
+
+        .numero-paso {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 50%;
+            background: #145DA0;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .paso-caida strong {
+            display: block;
+            color: #172B3A;
+            margin-bottom: 5px;
+        }
+
+        .paso-caida p {
+            margin: 0;
+            color: #667784;
+            line-height: 1.4;
+        }
+
+        /* SIMULADOR */
+
+        .simulador-caida {
+            background: #FFF8F8;
+            border: 2px solid #F1C4C4;
+            border-radius: 18px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .simulador-caida h3 {
+            margin-top: 0;
+            color: #C62828;
+        }
+
+        .simulador-caida p {
+            color: #536471;
+            line-height: 1.5;
+        }
+
+        .btn-caida {
+            display: inline-block;
+            background: #C62828 !important;
+            color: white !important;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 25px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-caida:hover {
+            opacity: 0.9;
+        }
+
+        /* RESULTADO */
+
+        #protocoloCaida {
+            margin-top: 20px;
+        }
+
+        .resultado-caida {
+            background: #FFF5D9;
+            border-left: 5px solid #C62828;
+            border-radius: 12px;
+            padding: 20px;
+            color: #172B3A;
+            line-height: 1.6;
+        }
+
+        /* ARDUINO */
+
+        .arduino-panel {
+            background: #EAF5FF;
+            border-left: 5px solid #145DA0;
+            border-radius: 15px;
+            padding: 22px;
+            margin-top: 25px;
+        }
+
+        .arduino-panel h3 {
+            margin-top: 0;
+            color: #145DA0;
+        }
+
+        .arduino-panel p {
+            color: #536471;
+            line-height: 1.6;
+        }
+
+
+        /* ==============================
+           CERRAR SESIÓN
+        ============================== */
+
+        .cerrar-sesion {
+            margin-top: 15px !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+            padding-top: 15px !important;
+        }
+
+        .cerrar-sesion:hover {
+            background: #C62828 !important;
+            color: #FFFFFF !important;
+        }
+
+
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+
+        @media (max-width: 700px) {
+
+            .pasos-protocolo {
+                grid-template-columns: 1fr;
+            }
+
+            .caida-hero {
+                padding: 20px;
+            }
+
+            .caida-hero h2 {
+                font-size: 23px;
+            }
+
+            .btn-caida {
+                width: 100%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ==============================
+         MENÚ
+    ============================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h1>NorApp</h1>
+
+            <p>
+                Bienestar y acompañamiento
+            </p>
+
+        </div>
+
+
+        <nav>
+
+            <a href="../index.html">
+                🏠 Inicio
+            </a>
+
+            <a href="perfil.html">
+                👤 Mi perfil
+            </a>
+
+            <a href="salud.html">
+                ❤️ Mi salud
+            </a>
+
+            <a href="caidas.html" class="activo">
+                ⚠️ Detección de caídas
+            </a>
+
+            <a href="ubicacion.html">
+                📍 Ubicación
+            </a>
+
+            <a href="recordatorios.html">
+                💊 Recordatorios
+            </a>
+
+            <a href="alertas.html">
+                🚨 Alertas
+            </a>
+
+            <a href="asistente.html">
+                🤖 Asistente
+            </a>
+
+            <a href="familia.html">
+                👨‍👩‍👧 Familia
+            </a>
+
+            <a href="historial.html">
+                📋 Historial
+            </a>
+
+            <a href="configuracion.html">
+                ⚙️ Configuración
+            </a>
+
+
+            <!-- CERRAR SESIÓN -->
+
+            <a
+                href="#"
+                onclick="cerrarSesion(); return false;"
+                class="cerrar-sesion"
+            >
+                🚪 Cerrar sesión
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- ==============================
+         CONTENIDO
+    ============================== -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+
+                <h2>
+                    Detección de caídas
+                </h2>
+
+                <p>
+                    Protección y respuesta ante posibles accidentes
+                </p>
+
+            </div>
+
+
+            <div class="usuario">
+
+                👤
+
+                <span id="nombreUsuarioCaidas">
+                    Usuario
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <section class="contenido">
+
+
+            <!-- ==============================
+                 HERO
+            ============================== -->
+
+            <div class="caida-hero">
+
+                <h2>
+                    🛡️ Sistema de detección de caídas
+                </h2>
+
+                <p>
+                    NorApp está diseñado para detectar una posible caída
+                    y activar un protocolo de ayuda para proteger al
+                    adulto mayor.
+                </p>
+
+            </div>
+
+
+            <!-- ==============================
+                 ESTADOS
+            ============================== -->
+
+            <div class="cards">
+
+
+                <!-- ESTADO -->
+
+                <div class="card estado-caida-card">
+
+                    <div class="icono verde">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Estado
+                        </h3>
+
+                        <strong>
+                            Preparado
+                        </strong>
+
+                        <p>
+                            Sistema listo para recibir información
+                            del dispositivo.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SENSOR -->
+
+                <div class="card sensor-card">
+
+                    <div class="icono azul">
+                        📡
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Sensor
+                        </h3>
+
+                        <strong>
+                            Preparado
+                        </strong>
+
+                        <p>
+                            Listo para conectarse con Arduino.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ALERTAS -->
+
+                <div class="card alerta-card">
+
+                    <div class="icono rojo">
+                        🚨
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Alertas
+                        </h3>
+
+                        <strong id="estadoAlertaCaidas">
+                            Sin alertas
+                        </strong>
+
+                        <p>
+                            No hay una emergencia activa.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONTACTO -->
+
+                <div class="card contacto-card-caida">
+
+                    <div class="icono turquesa">
+                        👨‍👩‍👧
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Contacto
+                        </h3>
+
+                        <strong id="contactoCaidas">
+                            Sin registrar
+                        </strong>
+
+                        <p>
+                            Familiar o persona de contacto.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==============================
+                 PROTOCOLO
+            ============================== -->
+
+            <div class="panel">
+
+                <h2>
+                    🔄 ¿Qué ocurre si se detecta una caída?
+                </h2>
+
+                <p>
+                    Este es el protocolo que NorApp seguirá cuando
+                    el dispositivo detecte una posible caída.
+                </p>
+
+
+                <div class="pasos-protocolo">
+
+
+                    <!-- PASO 1 -->
+
+                    <div class="paso-caida">
+
+                        <div class="numero-paso">
+                            1
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Detección
+                            </strong>
+
+                            <p>
+                                El sensor del dispositivo detecta
+                                un movimiento que podría corresponder
+                                a una caída.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASO 2 -->
+
+                    <div class="paso-caida">
+
+                        <div class="numero-paso">
+                            2
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Pregunta al usuario
+                            </strong>
+
+                            <p>
+                                El asistente pregunta al adulto mayor
+                                si necesita ayuda.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASO 3 -->
+
+                    <div class="paso-caida">
+
+                        <div class="numero-paso">
+                            3
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Evaluación
+                            </strong>
+
+                            <p>
+                                El usuario puede indicar si está bien
+                                o si necesita asistencia.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASO 4 -->
+
+                    <div class="paso-caida">
+
+                        <div class="numero-paso">
+                            4
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Aviso
+                            </strong>
+
+                            <p>
+                                Si necesita ayuda, NorApp registra
+                                la alerta y prepara la información
+                                para el contacto familiar.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASO 5 -->
+
+                    <div class="paso-caida">
+
+                        <div class="numero-paso">
+                            5
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Ubicación
+                            </strong>
+
+                            <p>
+                                La ubicación registrada puede ser
+                                consultada por la persona autorizada.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASO 6 -->
+
+                    <div class="paso-caida">
+
+                        <div class="numero-paso">
+                            6
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Historial
+                            </strong>
+
+                            <p>
+                                El evento queda registrado para
+                                revisar posteriormente.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==============================
+                 SIMULADOR
+            ============================== -->
+
+            <div class="simulador-caida">
+
+                <h3>
+                    🚨 Simulador de caída
+                </h3>
+
+                <p>
+                    Este botón permite probar el protocolo sin
+                    utilizar todavía el sensor físico de Arduino.
+                </p>
+
+                <button
+                    type="button"
+                    class="btn-caida"
+                    onclick="iniciarProtocoloCaida()"
+                >
+                    🚨 Simular caída
+                </button>
+
+                <div id="protocoloCaida"></div>
+
+            </div>
+
+
+            <!-- ==============================
+                 ARDUINO
+            ============================== -->
+
+            <div class="arduino-panel">
+
+                <h3>
+                    ⌚ Preparación para Arduino
+                </h3>
+
+                <p>
+                    Esta página ya contiene el flujo de detección
+                    y respuesta. Posteriormente, el sensor de Arduino
+                    podrá enviar la señal de una posible caída para
+                    iniciar este protocolo automáticamente.
+                </p>
+
+                <p>
+
+                    <strong>
+                        Estado actual:
+                    </strong>
+
+                    prototipo web preparado para conexión con hardware.
+
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==============================
+         JAVASCRIPT PRINCIPAL
+    ============================== -->
+
+    <script src="../js/app.js"></script>
+
+
+    <!-- ==============================
+         JAVASCRIPT DE ESTA PÁGINA
+    ============================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const nombre =
+                    localStorage.getItem("norappUsuario");
+
+                const contacto =
+                    localStorage.getItem("norappContacto");
+
+                const nombreElemento =
+                    document.getElementById(
+                        "nombreUsuarioCaidas"
+                    );
+
+                const contactoElemento =
+                    document.getElementById(
+                        "contactoCaidas"
+                    );
+
+
+                if (
+                    nombre &&
+                    nombreElemento
+                ) {
+
+                    nombreElemento.textContent =
+                        nombre;
+                }
+
+
+                if (
+                    contacto &&
+                    contactoElemento
+                ) {
+
+                    contactoElemento.textContent =
+                        contacto;
+                }
+
+
+                const alerta =
+                    localStorage.getItem(
+                        "norappAlerta"
+                    );
+
+                const estadoAlerta =
+                    document.getElementById(
+                        "estadoAlertaCaidas"
+                    );
+
+
+                if (
+                    alerta === "caida" &&
+                    estadoAlerta
+                ) {
+
+                    estadoAlerta.textContent =
+                        "Alerta registrada";
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NorApp 2.0</title>
+
+    <link rel="stylesheet" href="css/estilo.css">
+
+    <style>
+        /* =====================================================
+           REGISTRO INICIAL
+        ===================================================== */
+
+        #pantallaRegistro {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            background:
+                linear-gradient(135deg, #E7F8F7 0%, #EAF5FF 50%, #FFF6D8 100%);
+        }
+
+        .registro-box {
+            width: 100%;
+            max-width: 620px;
+            background: #FFFFFF;
+            padding: 42px;
+            border-radius: 28px;
+            box-shadow: 0 15px 45px rgba(11, 60, 93, 0.15);
+            border: 1px solid #D8E4EB;
+        }
+
+        .registro-logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .registro-logo h1 {
+            margin: 0;
+            font-size: 42px;
+            font-weight: 900;
+            color: #0B3C5D;
+            letter-spacing: 2px;
+        }
+
+        .registro-logo p {
+            margin: 6px 0 0;
+            color: #168C8C;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .registro-logo .logo-icono {
+            font-size: 42px;
+            margin-bottom: 5px;
+        }
+
+        .registro-box h2 {
+            text-align: center;
+            color: #172B3A;
+            margin-bottom: 8px;
+            font-size: 27px;
+        }
+
+        .registro-intro {
+            text-align: center;
+            color: #526572;
+            margin-bottom: 28px;
+            font-size: 16px;
+        }
+
+        .campo-registro {
+            margin-bottom: 18px;
+        }
+
+        .campo-registro label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+            color: #0B3C5D;
+            font-size: 16px;
+        }
+
+        .campo-registro input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #D8E4EB;
+            border-radius: 13px;
+            font-size: 17px;
+            color: #172B3A;
+            background: #FFFFFF;
+            box-sizing: border-box;
+        }
+
+        .campo-registro input:focus {
+            outline: none;
+            border-color: #145DA0;
+            box-shadow: 0 0 0 3px rgba(20, 93, 160, 0.10);
+        }
+
+        .fila-registro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .btn-comenzar {
+            width: 100%;
+            border: none;
+            background: #145DA0;
+            color: #FFFFFF;
+            padding: 17px;
+            border-radius: 14px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: 0.2s ease;
+        }
+
+        .btn-comenzar:hover {
+            background: #0B3C5D;
+            transform: translateY(-2px);
+        }
+
+        .error-registro {
+            display: none;
+            background: #FDECEC;
+            color: #9E1F1F;
+            padding: 13px;
+            border-radius: 12px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .aviso-registro {
+            margin-top: 20px;
+            padding: 14px;
+            background: #E7F8F7;
+            color: #0B6868;
+            border-radius: 12px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* =====================================================
+           INICIO
+        ===================================================== */
+
+        .bienvenida {
+            background: linear-gradient(135deg, #145DA0, #168C8C);
+            color: white;
+            border-radius: 22px;
+            padding: 30px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 25px rgba(11, 60, 93, 0.15);
+        }
+
+        .bienvenida h1 {
+            color: white;
+            font-size: 32px;
+            margin-bottom: 6px;
+        }
+
+        .bienvenida p {
+            color: #EAF5FF;
+            font-size: 17px;
+            margin: 0;
+        }
+
+        .estado-general {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            background: rgba(255,255,255,0.14);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 11px 15px;
+            border-radius: 12px;
+            width: fit-content;
+        }
+
+        .estado-general .punto {
+            width: 12px;
+            height: 12px;
+            background: #70D89A;
+            border-radius: 50%;
+        }
+
+        .funciones-titulo {
+            margin-bottom: 15px;
+        }
+
+        .funciones-titulo h2 {
+            color: #0B3C5D;
+            margin-bottom: 4px;
+        }
+
+        .funciones-titulo p {
+            color: #526572;
+        }
+
+        .card-inicio {
+            position: relative;
+            overflow: hidden;
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-inicio .icono {
+            width: 60px;
+            height: 60px;
+            font-size: 30px;
+        }
+
+        .card-inicio h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .card-inicio p {
+            flex: 1;
+            font-size: 16px;
+        }
+
+        .card-inicio .btn {
+            margin-top: 18px;
+            width: 100%;
+        }
+
+        .info-rapida {
+            margin-top: 24px;
+        }
+
+        .info-rapida h2 {
+            color: #0B3C5D;
+        }
+
+        .dato-rapido {
+            min-height: 105px;
+        }
+
+        .dato-rapido h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .dato-rapido p {
+            font-size: 19px;
+            font-weight: bold;
+            color: #172B3A;
+        }
+
+        .ayuda-inicio {
+            background: linear-gradient(135deg, #FDECEC, #FFF5F5);
+            border: 2px solid #E9B5B5;
+            border-left: 7px solid #C62828;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 24px 0;
+        }
+
+        .ayuda-inicio h2 {
+            color: #9E1F1F;
+            margin-bottom: 8px;
+        }
+
+        .ayuda-inicio p {
+            color: #6E2929;
+            margin-bottom: 17px;
+        }
+
+        .actividad-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .actividad-icono {
+            width: 45px;
+            height: 45px;
+            min-width: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #EAF5FF;
+            font-size: 22px;
+        }
+
+        .actividad-texto {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .actividad-texto strong {
+            color: #0B3C5D;
+        }
+
+        .actividad-texto span {
+            color: #526572;
+            font-size: 14px;
+        }
+
+        .sobre-norapp {
+            background: #FFFFFF;
+            border: 1px solid #D8E4EB;
+            border-radius: 18px;
+            padding: 22px;
+            margin-top: 24px;
+        }
+
+        .sobre-norapp h2 {
+            color: #0B3C5D;
+            margin-bottom: 8px;
+        }
+
+        .sobre-norapp p {
+            color: #526572;
+        }
+
+        /* =====================================================
+           CERRAR SESIÓN
+        ===================================================== */
+
+        .cerrar-sesion {
+            margin-top: 15px !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+            padding-top: 15px !important;
+        }
+
+        .cerrar-sesion:hover {
+            background: #C62828 !important;
+            color: #FFFFFF !important;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            #pantallaRegistro {
+                padding: 14px;
+            }
+
+            .registro-box {
+                padding: 27px 19px;
+                border-radius: 20px;
+            }
+
+            .registro-logo h1 {
+                font-size: 34px;
+            }
+
+            .fila-registro {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .campo-registro input {
+                min-height: 52px;
+            }
+
+            .btn-comenzar {
+                min-height: 56px;
+            }
+
+            .bienvenida {
+                padding: 22px;
+                border-radius: 18px;
+            }
+
+            .bienvenida h1 {
+                font-size: 27px;
+            }
+
+            .card-inicio {
+                min-height: 230px;
+            }
+
+            .ayuda-inicio {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         REGISTRO INICIAL
+    ===================================================== -->
+
+    <section id="pantallaRegistro">
+
+        <div class="registro-box">
+
+            <div class="registro-logo">
+
+                <div class="logo-icono">🩵</div>
+
+                <h1>NORAPP</h1>
+
+                <p>Tu apoyo, siempre contigo</p>
+
+            </div>
+
+            <h2>¡Bienvenido/a! 👋</h2>
+
+            <p class="registro-intro">
+                Completa tus datos para personalizar tu experiencia
+                con NorApp.
+            </p>
+
+            <form id="formularioRegistro">
+
+                <div class="campo-registro">
+
+                    <label for="nombreUsuario">
+                        ¿Cómo te llamas?
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nombreUsuario"
+                        placeholder="Escribe tu nombre"
+                        required
+                    >
+
+                </div>
+
+                <div class="fila-registro">
+
+                    <div class="campo-registro">
+
+                        <label for="edadUsuario">
+                            Edad
+                        </label>
+
+                        <input
+                            type="number"
+                            id="edadUsuario"
+                            placeholder="Ej. 72"
+                            min="1"
+                            max="120"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="campo-registro">
+
+                        <label for="ciudadUsuario">
+                            Ciudad
+                        </label>
+
+                        <input
+                            type="text"
+                            id="ciudadUsuario"
+                            placeholder="Ej. Santiago"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="campo-registro">
+
+                    <label for="contactoUsuario">
+                        👨‍👩‍👧 Persona de contacto
+                    </label>
+
+                    <input
+                        type="text"
+                        id="contactoUsuario"
+                        placeholder="Ej. Ana González"
+                        required
+                    >
+
+                </div>
+
+                <div class="campo-registro">
+
+                    <label for="telefonoUsuario">
+                        📞 Teléfono de contacto
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="telefonoUsuario"
+                        placeholder="+56 9 1234 5678"
+                        required
+                    >
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn-comenzar"
+                >
+                    Comenzar con NorApp →
+                </button>
+
+                <div
+                    id="errorRegistro"
+                    class="error-registro"
+                ></div>
+
+            </form>
+
+            <div class="aviso-registro">
+                🔒 Tus datos se guardan en este dispositivo
+                para personalizar la demostración de NorApp.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         APLICACIÓN
+    ===================================================== -->
+
+    <div id="aplicacionNorApp" style="display:none;">
+
+        <!-- MENÚ -->
+
+        <aside class="sidebar">
+
+            <div class="logo">
+
+                <h1>NORAPP</h1>
+
+                <p>Tu apoyo, siempre contigo</p>
+
+            </div>
+
+            <nav>
+
+                <a href="index.html" class="activo">
+                    🏠 Inicio
+                </a>
+
+                <a href="paginas/perfil.html">
+                    👤 Mi perfil
+                </a>
+
+                <a href="paginas/salud.html">
+                    ❤️ Salud
+                </a>
+
+                <a href="paginas/caidas.html">
+                    🛡️ Caídas
+                </a>
+
+                <a href="paginas/ubicacion.html">
+                    📍 Ubicación
+                </a>
+
+                <a href="paginas/recordatorios.html">
+                    💊 Recordatorios
+                </a>
+
+                <a href="paginas/alertas.html">
+                    🚨 Alertas
+                </a>
+
+                <a href="paginas/asistente.html">
+                    🤖 Asistente
+                </a>
+
+                <a href="paginas/familia.html">
+                    👨‍👩‍👧 Familia
+                </a>
+
+                <a href="paginas/historial.html">
+                    📋 Historial
+                </a>
+
+                <a href="paginas/configuracion.html">
+                    ⚙️ Configuración
+                </a>
+
+                <!-- CERRAR SESIÓN -->
+
+                <a
+                    href="#"
+                    onclick="cerrarSesion(); return false;"
+                    class="cerrar-sesion"
+                >
+                    🚪 Cerrar sesión
+                </a>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- CONTENIDO -->
+
+        <main class="main">
+
+            <div class="contenido">
+
+                <!-- BIENVENIDA -->
+
+                <section class="bienvenida">
+
+                    <h1>
+                        Hola,
+                        <span id="nombreInicio">Usuario</span>
+                        👋
+                    </h1>
+
+                    <p>
+                        Estamos aquí para acompañarte y ayudarte
+                        a mantenerte seguro/a.
+                    </p>
+
+                    <div class="estado-general">
+
+                        <span class="punto"></span>
+
+                        <span>
+                            Sistema activo y funcionando
+                        </span>
+
+                    </div>
+
+                </section>
+
+
+                <!-- FUNCIONES -->
+
+                <section>
+
+                    <div class="funciones-titulo">
+
+                        <h2>¿Qué necesitas hacer?</h2>
+
+                        <p>
+                            Selecciona una de las funciones principales.
+                        </p>
+
+                    </div>
+
+
+                    <div class="cards">
+
+                        <!-- SALUD -->
+
+                        <div class="card verde card-inicio">
+
+                            <div class="icono verde">
+                                ❤️
+                            </div>
+
+                            <h3>Salud</h3>
+
+                            <p>
+                                Registra y consulta tus mediciones
+                                de salud.
+                            </p>
+
+                            <a
+                                href="paginas/salud.html"
+                                class="btn verde"
+                            >
+                                Ver mi salud →
+                            </a>
+
+                        </div>
+
+
+                        <!-- MEDICAMENTOS -->
+
+                        <div class="card amarillo card-inicio">
+
+                            <div class="icono amarillo">
+                                💊
+                            </div>
+
+                            <h3>Medicamentos</h3>
+
+                            <p>
+                                Revisa tus recordatorios y confirma
+                                cuando tomes un medicamento.
+                            </p>
+
+                            <a
+                                href="paginas/recordatorios.html"
+                                class="btn amarillo"
+                            >
+                                Ver medicamentos →
+                            </a>
+
+                        </div>
+
+
+                        <!-- ASISTENTE -->
+
+                        <div class="card turquesa card-inicio">
+
+                            <div class="icono turquesa">
+                                🤖
+                            </div>
+
+                            <h3>Asistente</h3>
+
+                            <p>
+                                Habla con NorApp y recibe ayuda
+                                durante el día.
+                            </p>
+
+                            <a
+                                href="paginas/asistente.html"
+                                class="btn turquesa"
+                            >
+                                Hablar con NorApp →
+                            </a>
+
+                        </div>
+
+
+                        <!-- UBICACIÓN -->
+
+                        <div class="card azul card-inicio">
+
+                            <div class="icono azul">
+                                📍
+                            </div>
+
+                            <h3>Ubicación</h3>
+
+                            <p>
+                                Consulta la ubicación registrada
+                                en NorApp.
+                            </p>
+
+                            <a
+                                href="paginas/ubicacion.html"
+                                class="btn azul"
+                            >
+                                Ver ubicación →
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- AYUDA -->
+
+                <section class="ayuda-inicio">
+
+                    <h2>
+                        🚨 ¿Necesitas ayuda?
+                    </h2>
+
+                    <p>
+                        Si ocurre una situación de emergencia,
+                        puedes iniciar el protocolo de ayuda
+                        de NorApp.
+                    </p>
+
+                    <a
+                        href="paginas/caidas.html"
+                        class="btn rojo"
+                    >
+                        🚨 Iniciar protocolo de ayuda
+                    </a>
+
+                </section>
+
+
+                <!-- ACTIVIDAD -->
+
+                <section class="panel">
+
+                    <h2>📋 Actividad reciente</h2>
+
+                    <p>
+                        Aquí podrás ver los últimos eventos
+                        registrados por NorApp.
+                    </p>
+
+                    <div class="lista">
+
+                        <div class="item actividad-item">
+
+                            <div class="actividad-icono">
+                                🟢
+                            </div>
+
+                            <div class="actividad-texto">
+
+                                <strong id="estadoSistemaInicio">
+                                    Sistema activo
+                                </strong>
+
+                                <span id="etiquetaSistemaInicio">
+                                    NorApp está funcionando correctamente.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="item actividad-item">
+
+                            <div class="actividad-icono">
+                                🚨
+                            </div>
+
+                            <div class="actividad-texto">
+
+                                <strong id="alertasInicio">
+                                    Sin alertas recientes
+                                </strong>
+
+                                <span>
+                                    Estado de seguridad.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="item actividad-item">
+
+                            <div class="actividad-icono">
+                                🤖
+                            </div>
+
+                            <div class="actividad-texto">
+
+                                <strong>
+                                    Asistente
+                                </strong>
+
+                                <span id="actividadAsistenteInicio">
+                                    Sin actividad reciente.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- INFORMACIÓN -->
+
+                <section class="panel info-rapida">
+
+                    <h2>👤 Tu información</h2>
+
+                    <p>
+                        Estos datos corresponden a la información
+                        ingresada durante el registro.
+                    </p>
+
+                    <div class="cards">
+
+                        <div class="card azul dato-rapido">
+
+                            <h3>🎂 Edad</h3>
+
+                            <p id="edadInicio">
+                                —
+                            </p>
+
+                        </div>
+
+
+                        <div class="card azul dato-rapido">
+
+                            <h3>📍 Ciudad</h3>
+
+                            <p id="ciudadInicio">
+                                —
+                            </p>
+
+                        </div>
+
+
+                        <div class="card turquesa dato-rapido">
+
+                            <h3>👨‍👩‍👧 Contacto</h3>
+
+                            <p id="contactoInicio">
+                                —
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ACCESOS RÁPIDOS -->
+
+                <section class="panel">
+
+                    <h2>⚡ Accesos rápidos</h2>
+
+                    <p>
+                        También puedes acceder directamente a estas
+                        funciones.
+                    </p>
+
+                    <div class="botones">
+
+                        <a
+                            href="paginas/caidas.html"
+                            class="btn rojo"
+                        >
+                            🛡️ Caídas
+                        </a>
+
+                        <a
+                            href="paginas/alertas.html"
+                            class="btn rojo"
+                        >
+                            🚨 Alertas
+                        </a>
+
+                        <a
+                            href="paginas/familia.html"
+                            class="btn turquesa"
+                        >
+                            👨‍👩‍👧 Familia
+                        </a>
+
+                        <a
+                            href="paginas/historial.html"
+                            class="btn azul"
+                        >
+                            📋 Historial
+                        </a>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SOBRE NORAPP -->
+
+                <section class="sobre-norapp">
+
+                    <h2>💙 Sobre NorApp</h2>
+
+                    <p>
+                        NorApp es un prototipo de asistencia y
+                        acompañamiento pensado para facilitar el
+                        acceso a tecnología y apoyo para personas
+                        mayores.
+                    </p>
+
+                    <p style="margin-top:10px;">
+                        Algunas funciones de esta versión son
+                        simulaciones destinadas a demostrar el
+                        funcionamiento de la propuesta.
+                    </p>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT DE REGISTRO
+    ===================================================== -->
+
+    <script>
+
+        const pantallaRegistro =
+            document.getElementById("pantallaRegistro");
+
+        const aplicacion =
+            document.getElementById("aplicacionNorApp");
+
+        const formulario =
+            document.getElementById("formularioRegistro");
+
+
+        function cargarUsuario() {
+
+            const configurado =
+                localStorage.getItem("norappConfigurado");
+
+
+            if (configurado === "true") {
+
+                pantallaRegistro.style.display = "none";
+
+                aplicacion.style.display = "block";
+
+
+                const nombre =
+                    localStorage.getItem("norappUsuario") ||
+                    "Usuario";
+
+                const edad =
+                    localStorage.getItem("norappEdad") ||
+                    "—";
+
+                const ciudad =
+                    localStorage.getItem("norappCiudad") ||
+                    "—";
+
+                const contacto =
+                    localStorage.getItem("norappContacto") ||
+                    "—";
+
+
+                document.getElementById("nombreInicio")
+                    .textContent = nombre;
+
+                document.getElementById("edadInicio")
+                    .textContent = edad + " años";
+
+                document.getElementById("ciudadInicio")
+                    .textContent = ciudad;
+
+                document.getElementById("contactoInicio")
+                    .textContent = contacto;
+
+            } else {
+
+                pantallaRegistro.style.display = "flex";
+
+                aplicacion.style.display = "none";
+
+            }
+
+        }
+
+
+        formulario.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const nombre =
+                    document.getElementById("nombreUsuario")
+                        .value.trim();
+
+                const edad =
+                    document.getElementById("edadUsuario")
+                        .value.trim();
+
+                const ciudad =
+                    document.getElementById("ciudadUsuario")
+                        .value.trim();
+
+                const contacto =
+                    document.getElementById("contactoUsuario")
+                        .value.trim();
+
+                const telefono =
+                    document.getElementById("telefonoUsuario")
+                        .value.trim();
+
+                const error =
+                    document.getElementById("errorRegistro");
+
+
+                if (
+                    !nombre ||
+                    !edad ||
+                    !ciudad ||
+                    !contacto ||
+                    !telefono
+                ) {
+
+                    error.textContent =
+                        "Completa todos los campos para continuar.";
+
+                    error.style.display = "block";
+
+                    return;
+
+                }
+
+
+                localStorage.setItem(
+                    "norappUsuario",
+                    nombre
+                );
+
+                localStorage.setItem(
+                    "norappEdad",
+                    edad
+                );
+
+                localStorage.setItem(
+                    "norappCiudad",
+                    ciudad
+                );
+
+                localStorage.setItem(
+                    "norappContacto",
+                    contacto
+                );
+
+                localStorage.setItem(
+                    "norappTelefono",
+                    telefono
+                );
+
+                localStorage.setItem(
+                    "norappConfigurado",
+                    "true"
+                );
+
+
+                cargarUsuario();
+
+            }
+        );
+
+
+        cargarUsuario();
+
+    </script>
+
+
+    <!-- =====================================================
+         JAVASCRIPT GENERAL DE NORAPP
+    ===================================================== -->
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

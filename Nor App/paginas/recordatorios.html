@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NorApp | Recordatorios</title>
+
+    <link rel="stylesheet" href="../css/estilo.css">
+
+    <style>
+
+        /* ==============================
+           ENCABEZADO
+        ============================== */
+
+        .recordatorio-hero {
+            background: linear-gradient(135deg, #FFF8D9, #FFF1C7);
+            border-left: 6px solid #C58A00;
+            border-radius: 18px;
+            padding: 26px;
+            margin-bottom: 25px;
+        }
+
+        .recordatorio-hero h2 {
+            margin: 0 0 10px;
+            color: #172B3A;
+            font-size: 27px;
+        }
+
+        .recordatorio-hero p {
+            margin: 0;
+            color: #536471;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+
+        /* ==============================
+           TARJETAS
+        ============================== */
+
+        .pendientes-card {
+            border-top: 5px solid #C58A00;
+        }
+
+        .completados-card {
+            border-top: 5px solid #287D4A;
+        }
+
+        .proximo-card {
+            border-top: 5px solid #168C8C;
+        }
+
+        .activo-card {
+            border-top: 5px solid #145DA0;
+        }
+
+        .numero {
+            font-size: 25px;
+            font-weight: bold;
+            color: #145DA0;
+            margin: 8px 0;
+        }
+
+
+        /* ==============================
+           MEDICAMENTO DESTACADO
+        ============================== */
+
+        .medicamento-destacado {
+            background: #FFFDF4;
+            border: 2px solid #E7D79D;
+            border-radius: 18px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .medicamento-destacado h3 {
+            color: #8A6200;
+            margin-top: 0;
+            font-size: 23px;
+        }
+
+        .hora-medicamento {
+            display: inline-block;
+            background: #C58A00;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+
+        /* ==============================
+           BOTÓN MEDICAMENTO
+        ============================== */
+
+        .btn-medicamento {
+            display: inline-block;
+            background: #287D4A !important;
+            color: white !important;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 22px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-medicamento:hover {
+            opacity: 0.9;
+        }
+
+
+        /* ==============================
+           RESPUESTA
+        ============================== */
+
+        #mensajeMedicamento,
+        #respuestaMedicamento {
+            margin-top: 15px;
+        }
+
+        .respuesta-asistente {
+            background: #E8F8F5;
+            border-left: 5px solid #168C8C;
+            border-radius: 12px;
+            padding: 18px;
+            color: #172B3A;
+        }
+
+
+        /* ==============================
+           LISTA DE MEDICAMENTOS
+        ============================== */
+
+        .medicamento-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 18px;
+            margin: 12px 0;
+            background: #F4F8FB;
+            border-radius: 14px;
+        }
+
+        .medicamento-item strong {
+            color: #172B3A;
+            font-size: 17px;
+        }
+
+        .medicamento-hora {
+            color: #145DA0;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .estado-normal {
+            display: inline-block;
+            background: #E8F5E9;
+            color: #287D4A;
+            padding: 9px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+
+        /* ==============================
+           INFORMACIÓN
+        ============================== */
+
+        .paso-recordatorio {
+            background: #F4F8FB;
+            border-radius: 13px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .paso-recordatorio strong {
+            color: #145DA0;
+        }
+
+
+        /* ==============================
+           AVISO
+        ============================== */
+
+        .aviso-recordatorio {
+            background: #FFF8E1;
+            border-left: 5px solid #C58A00;
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 20px;
+        }
+
+        .aviso-recordatorio strong {
+            color: #8A6200;
+        }
+
+
+        /* ==============================
+           CERRAR SESIÓN
+        ============================== */
+
+        .cerrar-sesion {
+            margin-top: 15px !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+            padding-top: 15px !important;
+        }
+
+        .cerrar-sesion:hover {
+            background: #C62828 !important;
+            color: #FFFFFF !important;
+        }
+
+
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+
+        @media (max-width: 700px) {
+
+            .medicamento-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .btn-medicamento {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==============================
+         MENÚ LATERAL
+    ============================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h1>NorApp</h1>
+
+            <p>
+                Bienestar y acompañamiento
+            </p>
+
+        </div>
+
+
+        <nav>
+
+            <a href="../index.html">
+                🏠 Inicio
+            </a>
+
+            <a href="perfil.html">
+                👤 Mi perfil
+            </a>
+
+            <a href="salud.html">
+                ❤️ Mi salud
+            </a>
+
+            <a href="caidas.html">
+                ⚠️ Detección de caídas
+            </a>
+
+            <a href="ubicacion.html">
+                📍 Ubicación
+            </a>
+
+            <a href="recordatorios.html" class="activo">
+                💊 Recordatorios
+            </a>
+
+            <a href="alertas.html">
+                🚨 Alertas
+            </a>
+
+            <a href="asistente.html">
+                🤖 Asistente
+            </a>
+
+            <a href="familia.html">
+                👨‍👩‍👧 Familia
+            </a>
+
+            <a href="historial.html">
+                📋 Historial
+            </a>
+
+            <a href="configuracion.html">
+                ⚙️ Configuración
+            </a>
+
+
+            <!-- CERRAR SESIÓN -->
+
+            <a
+                href="#"
+                onclick="cerrarSesion(); return false;"
+                class="cerrar-sesion"
+            >
+                🚪 Cerrar sesión
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- ==============================
+         CONTENIDO
+    ============================== -->
+
+    <main class="main">
+
+
+        <!-- ENCABEZADO -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h2>
+                    💊 Recordatorios
+                </h2>
+
+                <p>
+                    Organización de medicamentos y actividades
+                </p>
+
+            </div>
+
+
+            <div class="usuario">
+
+                👤 <span id="nombreRecordatorios">
+                    Usuario
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <section class="contenido">
+
+
+            <!-- HERO -->
+
+            <div class="recordatorio-hero">
+
+                <h2>
+                    💊 Tus medicamentos y recordatorios
+                </h2>
+
+                <p>
+                    NorApp ayuda a recordar los medicamentos
+                    programados y permite registrar cuando
+                    el adulto mayor confirma que los tomó.
+                </p>
+
+            </div>
+
+
+
+            <!-- ==============================
+                 RESUMEN
+            ============================== -->
+
+            <section class="cards">
+
+
+                <div class="card pendientes-card">
+
+                    <h3>
+                        💊 Pendientes
+                    </h3>
+
+                    <div
+                        class="numero"
+                        id="pendientesMedicamentos"
+                    >
+                        1
+                    </div>
+
+                    <p>
+                        Medicamentos por confirmar
+                    </p>
+
+                </div>
+
+
+
+                <div class="card completados-card">
+
+                    <h3>
+                        ✓ Completados
+                    </h3>
+
+                    <div
+                        class="numero"
+                        id="completadosMedicamentos"
+                    >
+                        1
+                    </div>
+
+                    <p>
+                        Registros realizados
+                    </p>
+
+                </div>
+
+
+
+                <div class="card proximo-card">
+
+                    <h3>
+                        🕐 Próximo
+                    </h3>
+
+                    <div class="numero">
+                        20:00
+                    </div>
+
+                    <p>
+                        Medicamento de la noche
+                    </p>
+
+                </div>
+
+
+
+                <div class="card activo-card">
+
+                    <h3>
+                        📅 Estado
+                    </h3>
+
+                    <div class="numero">
+                        Activo
+                    </div>
+
+                    <p>
+                        Recordatorios habilitados
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ==============================
+                 PRÓXIMO MEDICAMENTO
+            ============================== -->
+
+            <section class="panel">
+
+                <div class="medicamento-destacado">
+
+                    <h3>
+                        💊 Próximo medicamento
+                    </h3>
+
+                    <p>
+                        <strong>
+                            Medicamento de la noche
+                        </strong>
+                    </p>
+
+                    <div class="hora-medicamento">
+                        🕐 20:00
+                    </div>
+
+                    <p>
+                        📅 Frecuencia:
+                        <strong>
+                            Todos los días
+                        </strong>
+                    </p>
+
+                    <p>
+                        👤 Para:
+                        <strong id="usuarioMedicamento">
+                            Usuario
+                        </strong>
+                    </p>
+
+
+                    <button
+                        type="button"
+                        class="btn-medicamento"
+                        onclick="confirmarMedicamento()"
+                    >
+                        ✓ Tomé mi medicamento
+                    </button>
+
+
+                    <p id="mensajeMedicamento"></p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ==============================
+                 ASISTENTE
+            ============================== -->
+
+            <section class="panel">
+
+                <h3>
+                    🤖 Registro del asistente
+                </h3>
+
+                <div
+                    id="respuestaMedicamento"
+                    class="respuesta-asistente"
+                >
+
+                    <p>
+                        El asistente puede registrar
+                        la confirmación del medicamento
+                        dentro del prototipo.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ==============================
+                 MEDICAMENTOS PROGRAMADOS
+            ============================== -->
+
+            <section class="panel">
+
+                <h3>
+                    📋 Medicamentos programados
+                </h3>
+
+
+                <div class="medicamento-item">
+
+                    <div>
+
+                        <strong>
+                            🌅 Medicamento de la mañana
+                        </strong>
+
+                        <p>
+                            Todos los días
+                        </p>
+
+                    </div>
+
+                    <div class="medicamento-hora">
+                        🕐 08:00
+                    </div>
+
+                </div>
+
+
+                <div class="medicamento-item">
+
+                    <div>
+
+                        <strong>
+                            🌙 Medicamento de la noche
+                        </strong>
+
+                        <p>
+                            Todos los días
+                        </p>
+
+                    </div>
+
+                    <div class="medicamento-hora">
+                        🕐 20:00
+                    </div>
+
+                </div>
+
+
+                <span class="estado-normal">
+                    ✓ Recordatorios activos
+                </span>
+
+            </section>
+
+
+
+            <!-- ==============================
+                 AGREGAR
+            ============================== -->
+
+            <section class="panel">
+
+                <h3>
+                    ➕ Nuevo recordatorio
+                </h3>
+
+                <p>
+                    En la versión propuesta, el familiar
+                    o cuidador podrá configurar nuevos
+                    medicamentos y horarios.
+                </p>
+
+
+                <button
+                    type="button"
+                    class="btn"
+                    onclick="agregarRecordatorio()"
+                >
+                    ➕ Agregar recordatorio
+                </button>
+
+
+                <p id="mensajeRecordatorio"></p>
+
+            </section>
+
+
+
+            <!-- ==============================
+                 FAMILIA
+            ============================== -->
+
+            <section class="panel">
+
+                <h3>
+                    👨‍👩‍👧 Seguimiento familiar
+                </h3>
+
+                <p>
+                    Una persona autorizada podría configurar
+                    los recordatorios y revisar si fueron
+                    confirmados.
+                </p>
+
+
+                <a href="familia.html">
+
+                    <button
+                        type="button"
+                        class="btn"
+                    >
+                        👨‍👩‍👧 Ver familiar
+                    </button>
+
+                </a>
+
+
+                <a href="historial.html">
+
+                    <button
+                        type="button"
+                        class="btn"
+                    >
+                        📋 Ver historial
+                    </button>
+
+                </a>
+
+            </section>
+
+
+
+            <!-- ==============================
+                 FUNCIONAMIENTO
+            ============================== -->
+
+            <section class="panel">
+
+                <h3>
+                    🔄 ¿Cómo funciona?
+                </h3>
+
+
+                <div class="paso-recordatorio">
+
+                    <strong>
+                        1. ⚙️ Configuración
+                    </strong>
+
+                    <p>
+                        El familiar o cuidador configura
+                        el medicamento y su horario.
+                    </p>
+
+                </div>
+
+
+                <div class="paso-recordatorio">
+
+                    <strong>
+                        2. 🔔 Recordatorio
+                    </strong>
+
+                    <p>
+                        El adulto mayor recibe un aviso
+                        cuando llega la hora programada.
+                    </p>
+
+                </div>
+
+
+                <div class="paso-recordatorio">
+
+                    <strong>
+                        3. 🎤 Confirmación
+                    </strong>
+
+                    <p>
+                        El adulto mayor puede confirmar
+                        que tomó su medicamento.
+                    </p>
+
+                </div>
+
+
+                <div class="paso-recordatorio">
+
+                    <strong>
+                        4. 📋 Registro
+                    </strong>
+
+                    <p>
+                        La confirmación queda registrada
+                        en el historial del sistema.
+                    </p>
+
+                </div>
+
+
+                <div class="aviso-recordatorio">
+
+                    <strong>
+                        ℹ️ Prototipo escolar
+                    </strong>
+
+                    <p>
+                        En esta versión, la confirmación
+                        y los recordatorios funcionan como
+                        una simulación dentro del navegador.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ==============================
+         JAVASCRIPT
+    ============================== -->
+
+    <script src="../js/app.js"></script>
+
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const nombre =
+                localStorage.getItem("norappUsuario");
+
+
+            const nombreRecordatorios =
+                document.getElementById(
+                    "nombreRecordatorios"
+                );
+
+
+            const usuarioMedicamento =
+                document.getElementById(
+                    "usuarioMedicamento"
+                );
+
+
+            if (nombre) {
+
+                if (nombreRecordatorios) {
+
+                    nombreRecordatorios.textContent =
+                        nombre;
+
+                }
+
+
+                if (usuarioMedicamento) {
+
+                    usuarioMedicamento.textContent =
+                        nombre;
+
+                }
+
+            }
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

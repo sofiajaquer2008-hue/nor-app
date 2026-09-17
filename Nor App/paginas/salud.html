@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Salud - NorApp</title>
+
+    <link rel="stylesheet" href="../css/estilo.css">
+
+    <style>
+        /* =========================================
+           PÁGINA SALUD
+        ========================================= */
+
+        .salud-page {
+            margin-left: 280px;
+            width: calc(100% - 280px);
+            min-height: 100vh;
+            padding: 35px;
+            box-sizing: border-box;
+            background: var(--fondo);
+            color: var(--texto);
+        }
+
+        .salud-header {
+            background: linear-gradient(135deg, #2E8B57, #43A047);
+            color: white;
+            padding: 30px;
+            border-radius: 22px;
+            margin-bottom: 25px;
+            box-shadow: var(--sombra);
+        }
+
+        .salud-header h1 {
+            margin: 0 0 10px;
+            font-size: 34px;
+            color: white;
+        }
+
+        .salud-header p {
+            margin: 0;
+            font-size: 18px;
+            color: white;
+        }
+
+        .salud-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .medicion-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--sombra);
+            border-top: 7px solid var(--verde);
+        }
+
+        .medicion-card.corazon {
+            border-top-color: #E53935;
+        }
+
+        .medicion-card.oxigeno {
+            border-top-color: #1976D2;
+        }
+
+        .medicion-card.temperatura {
+            border-top-color: #F2A900;
+        }
+
+        .medicion-icono {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .medicion-card h2 {
+            font-size: 21px;
+            margin: 5px 0 15px;
+            color: var(--texto);
+        }
+
+        .medicion-valor {
+            font-size: 34px;
+            font-weight: bold;
+            color: var(--verde-oscuro);
+            margin-bottom: 5px;
+        }
+
+        .medicion-card.corazon .medicion-valor {
+            color: #B71C1C;
+        }
+
+        .medicion-card.oxigeno .medicion-valor {
+            color: #0D47A1;
+        }
+
+        .medicion-card.temperatura .medicion-valor {
+            color: #8A6200;
+        }
+
+        .medicion-unidad {
+            color: var(--texto-secundario);
+            font-size: 16px;
+        }
+
+        .estado-salud {
+            background: var(--verde-claro);
+            border-left: 7px solid var(--verde);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .estado-salud h2 {
+            margin-top: 0;
+            color: var(--verde-oscuro);
+        }
+
+        .estado-salud p {
+            font-size: 18px;
+            margin-bottom: 0;
+        }
+
+        .acciones-salud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .btn-salud {
+            border: none;
+            border-radius: 14px;
+            padding: 17px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-registrar {
+            background: var(--verde);
+            color: white;
+        }
+
+        .btn-registrar:hover {
+            background: var(--verde-oscuro);
+        }
+
+        .btn-historial {
+            background: var(--azul);
+            color: white;
+        }
+
+        .btn-historial:hover {
+            background: var(--azul-oscuro);
+        }
+
+        .mensaje-salud {
+            display: none;
+            background: var(--verde-claro);
+            color: var(--verde-oscuro);
+            border: 2px solid var(--verde);
+            border-radius: 15px;
+            padding: 18px;
+            margin-bottom: 25px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .arduino-panel {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--sombra);
+            border-left: 7px solid var(--turquesa);
+            margin-bottom: 25px;
+        }
+
+        .arduino-panel h2 {
+            color: var(--turquesa-oscuro);
+            margin-top: 0;
+        }
+
+        .arduino-panel p {
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--texto-secundario);
+        }
+
+        .arduino-estado {
+            display: inline-block;
+            background: var(--turquesa-claro);
+            color: var(--turquesa-oscuro);
+            padding: 10px 16px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .info-panel {
+            background: var(--azul-claro);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .info-panel h2 {
+            color: var(--azul-oscuro);
+            margin-top: 0;
+        }
+
+        .info-panel p {
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--texto);
+        }
+
+        .ultima-medicion {
+            background: white;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: var(--sombra);
+            margin-bottom: 25px;
+        }
+
+        .ultima-medicion h2 {
+            margin-top: 0;
+            color: var(--azul-oscuro);
+        }
+
+        .ultima-medicion p {
+            font-size: 17px;
+            color: var(--texto-secundario);
+        }
+
+
+        /* =========================================
+           CERRAR SESIÓN
+        ========================================= */
+
+        .cerrar-sesion {
+            margin-top: 15px !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+            padding-top: 15px !important;
+        }
+
+        .cerrar-sesion:hover {
+            background: #C62828 !important;
+            color: #FFFFFF !important;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 1100px) {
+
+            .salud-page {
+                margin-left: 240px;
+                width: calc(100% - 240px);
+            }
+
+            .salud-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .salud-page {
+                margin-left: 0;
+                width: 100%;
+                padding: 20px;
+            }
+
+            .salud-header h1 {
+                font-size: 28px;
+            }
+
+            .acciones-salud {
+                flex-direction: column;
+            }
+
+            .btn-salud {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================
+         MENÚ LATERAL
+    ========================================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h1>NorApp</h1>
+
+            <p>
+                Bienestar y acompañamiento
+            </p>
+
+        </div>
+
+
+        <nav>
+
+            <a href="../index.html">
+                🏠 Inicio
+            </a>
+
+            <a href="perfil.html">
+                👤 Mi perfil
+            </a>
+
+            <a href="salud.html" class="activo">
+                ❤️ Salud
+            </a>
+
+            <a href="caidas.html">
+                🚨 Caídas
+            </a>
+
+            <a href="ubicacion.html">
+                📍 Ubicación
+            </a>
+
+            <a href="recordatorios.html">
+                💊 Recordatorios
+            </a>
+
+            <a href="alertas.html">
+                ⚠️ Alertas
+            </a>
+
+            <a href="historial.html">
+                📋 Historial
+            </a>
+
+            <a href="asistente.html">
+                🤖 Asistente
+            </a>
+
+            <a href="familia.html">
+                👨‍👩‍👧 Familia
+            </a>
+
+            <a href="configuracion.html">
+                ⚙️ Configuración
+            </a>
+
+
+            <!-- CERRAR SESIÓN -->
+
+            <a
+                href="#"
+                onclick="cerrarSesion(); return false;"
+                class="cerrar-sesion"
+            >
+                🚪 Cerrar sesión
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =========================================
+         CONTENIDO PRINCIPAL
+    ========================================= -->
+
+    <main class="salud-page">
+
+
+        <!-- =========================================
+             ENCABEZADO
+        ========================================= -->
+
+        <section class="salud-header">
+
+            <h1>
+                ❤️ Mi salud
+            </h1>
+
+            <p>
+                Aquí puedes revisar y registrar tus mediciones de salud.
+            </p>
+
+        </section>
+
+
+        <!-- =========================================
+             MEDICIONES
+        ========================================= -->
+
+        <section class="salud-grid">
+
+
+            <!-- FRECUENCIA CARDÍACA -->
+
+            <div class="medicion-card corazon">
+
+                <div class="medicion-icono">
+                    ❤️
+                </div>
+
+                <h2>
+                    Frecuencia cardíaca
+                </h2>
+
+                <div
+                    class="medicion-valor"
+                    id="frecuenciaCardiaca"
+                >
+                    --
+                </div>
+
+                <div class="medicion-unidad">
+                    BPM
+                </div>
+
+            </div>
+
+
+            <!-- OXÍGENO -->
+
+            <div class="medicion-card oxigeno">
+
+                <div class="medicion-icono">
+                    🫁
+                </div>
+
+                <h2>
+                    Saturación de oxígeno
+                </h2>
+
+                <div
+                    class="medicion-valor"
+                    id="saturacionOxigeno"
+                >
+                    --
+                </div>
+
+                <div class="medicion-unidad">
+                    SpO₂
+                </div>
+
+            </div>
+
+
+            <!-- TEMPERATURA -->
+
+            <div class="medicion-card temperatura">
+
+                <div class="medicion-icono">
+                    🌡️
+                </div>
+
+                <h2>
+                    Temperatura
+                </h2>
+
+                <div
+                    class="medicion-valor"
+                    id="temperatura"
+                >
+                    --
+                </div>
+
+                <div class="medicion-unidad">
+                    °C
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             ESTADO
+        ========================================= -->
+
+        <section class="estado-salud">
+
+            <h2>
+                🟢 Estado del registro
+            </h2>
+
+            <p id="estadoRegistro">
+                Todavía no hay una medición registrada.
+            </p>
+
+        </section>
+
+
+        <!-- =========================================
+             BOTONES
+        ========================================= -->
+
+        <section class="acciones-salud">
+
+            <button
+                class="btn-salud btn-registrar"
+                onclick="registrarSalud()"
+            >
+                ❤️ Registrar medición
+            </button>
+
+
+            <a
+                href="historial.html"
+                class="btn-salud btn-historial"
+            >
+                📋 Ver historial
+            </a>
+
+        </section>
+
+
+        <!-- =========================================
+             MENSAJE DE REGISTRO
+        ========================================= -->
+
+        <div
+            id="mensajeSalud"
+            class="mensaje-salud"
+        >
+        </div>
+
+
+        <!-- =========================================
+             ÚLTIMA MEDICIÓN
+        ========================================= -->
+
+        <section class="ultima-medicion">
+
+            <h2>
+                🕐 Última medición
+            </h2>
+
+            <p id="ultimaMedicion">
+                No se ha registrado ninguna medición todavía.
+            </p>
+
+        </section>
+
+
+        <!-- =========================================
+             ARDUINO
+        ========================================= -->
+
+        <section class="arduino-panel">
+
+            <h2>
+                ⌚ Conexión con el reloj / Arduino
+            </h2>
+
+            <p>
+                Esta sección está preparada para conectar NorApp
+                con los sensores del dispositivo físico.
+            </p>
+
+            <p>
+                Cuando el Arduino esté conectado, las mediciones
+                podrán recibirse desde los sensores y mostrarse
+                automáticamente en esta pantalla.
+            </p>
+
+            <span class="arduino-estado">
+                🟢 Interfaz preparada para Arduino
+            </span>
+
+        </section>
+
+
+        <!-- =========================================
+             INFORMACIÓN
+        ========================================= -->
+
+        <section class="info-panel">
+
+            <h2>
+                ℹ️ Información importante
+            </h2>
+
+            <p>
+                Los valores que aparecen al presionar
+                <strong>“Registrar medición”</strong>
+                son datos simulados para el prototipo de NorApp.
+            </p>
+
+            <p>
+                En la versión final, estos datos serán obtenidos
+                mediante los sensores conectados al dispositivo.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         JAVASCRIPT PRINCIPAL
+    ========================================= -->
+
+    <script src="../js/app.js"></script>
+
+
+    <!-- =========================================
+         JAVASCRIPT DE ESTA PÁGINA
+    ========================================= -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const estado =
+                    localStorage.getItem("norappSalud");
+
+                const fecha =
+                    localStorage.getItem("norappFechaSalud");
+
+                const frecuencia =
+                    localStorage.getItem("norappFrecuencia");
+
+                const saturacion =
+                    localStorage.getItem("norappSaturacion");
+
+                const temperatura =
+                    localStorage.getItem("norappTemperatura");
+
+
+                if (estado === "registrado") {
+
+
+                    if (frecuencia) {
+
+                        document.getElementById(
+                            "frecuenciaCardiaca"
+                        ).textContent =
+                            frecuencia.replace(" BPM", "");
+                    }
+
+
+                    if (saturacion) {
+
+                        document.getElementById(
+                            "saturacionOxigeno"
+                        ).textContent =
+                            saturacion;
+                    }
+
+
+                    if (temperatura) {
+
+                        document.getElementById(
+                            "temperatura"
+                        ).textContent =
+                            temperatura.replace(" °C", "");
+                    }
+
+
+                    document.getElementById(
+                        "estadoRegistro"
+                    ).textContent =
+                        "La última medición fue registrada correctamente.";
+
+
+                    if (fecha) {
+
+                        document.getElementById(
+                            "ultimaMedicion"
+                        ).textContent =
+                            "Último registro: " + fecha;
+                    }
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>

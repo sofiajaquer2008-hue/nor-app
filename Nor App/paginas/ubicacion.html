@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NorApp | Ubicación</title>
+
+    <link rel="stylesheet" href="../css/estilo.css">
+
+    <style>
+
+        /* =========================================
+           UBICACIÓN
+        ========================================= */
+
+        .ubicacion-hero {
+            background: linear-gradient(135deg, #EAF5FF, #E8F8F5);
+            border-left: 6px solid #145DA0;
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .ubicacion-hero h2 {
+            margin: 0 0 10px;
+            color: #172B3A;
+            font-size: 27px;
+        }
+
+        .ubicacion-hero p {
+            margin: 0;
+            color: #536471;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        .ubicacion-card {
+            border-top: 5px solid #145DA0;
+        }
+
+        .zona-card {
+            border-top: 5px solid #168C8C;
+        }
+
+        .actualizacion-card {
+            border-top: 5px solid #287D4A;
+        }
+
+        .emergencia-card {
+            border-top: 5px solid #C62828;
+        }
+
+        .numero {
+            font-size: 24px;
+            font-weight: bold;
+            color: #145DA0;
+            margin: 8px 0;
+        }
+
+        #mapa {
+            min-height: 260px;
+            background: linear-gradient(135deg, #EAF5FF, #DDF1E7);
+            border-radius: 18px;
+            border: 2px solid #C8DDEA;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 25px;
+        }
+
+        #mapa .marcador {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        #mapa h3 {
+            margin: 5px 0;
+            color: #172B3A;
+        }
+
+        #mapa p {
+            color: #536471;
+            margin: 5px;
+        }
+
+        .aviso-gps {
+            background: #FFF8E1;
+            border-left: 5px solid #C58A00;
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 20px;
+        }
+
+        .aviso-gps strong {
+            color: #8A6200;
+        }
+
+        .botones-ubicacion {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .botones-ubicacion a {
+            text-decoration: none;
+        }
+
+
+        /* =========================================
+           CERRAR SESIÓN
+        ========================================= */
+
+        .cerrar-sesion {
+            margin-top: 15px !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+            padding-top: 15px !important;
+        }
+
+        .cerrar-sesion:hover {
+            background: #C62828 !important;
+            color: #FFFFFF !important;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 700px) {
+
+            .botones-ubicacion {
+                flex-direction: column;
+            }
+
+            .botones-ubicacion .btn {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- =========================================
+         MENÚ LATERAL
+    ========================================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h1>
+                NorApp
+            </h1>
+
+            <p>
+                Bienestar y acompañamiento
+            </p>
+
+        </div>
+
+
+        <nav>
+
+            <a href="../index.html">
+                🏠 Inicio
+            </a>
+
+            <a href="perfil.html">
+                👤 Mi perfil
+            </a>
+
+            <a href="salud.html">
+                ❤️ Mi salud
+            </a>
+
+            <a href="caidas.html">
+                ⚠️ Detección de caídas
+            </a>
+
+            <a href="ubicacion.html" class="activo">
+                📍 Ubicación
+            </a>
+
+            <a href="recordatorios.html">
+                💊 Recordatorios
+            </a>
+
+            <a href="alertas.html">
+                🚨 Alertas
+            </a>
+
+            <a href="asistente.html">
+                🤖 Asistente
+            </a>
+
+            <a href="familia.html">
+                👨‍👩‍👧 Familia
+            </a>
+
+            <a href="historial.html">
+                📋 Historial
+            </a>
+
+            <a href="configuracion.html">
+                ⚙️ Configuración
+            </a>
+
+
+            <!-- =================================
+                 CERRAR SESIÓN
+            ================================== -->
+
+            <a
+                href="#"
+                onclick="cerrarSesion(); return false;"
+                class="cerrar-sesion"
+            >
+                🚪 Cerrar sesión
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =========================================
+         CONTENIDO
+    ========================================= -->
+
+    <main class="main">
+
+
+        <!-- CABECERA -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h2>
+                    📍 Ubicación
+                </h2>
+
+                <p>
+                    Seguimiento de ubicación del adulto mayor
+                </p>
+
+            </div>
+
+
+            <div class="usuario">
+
+                👤
+
+                <span id="nombreUbicacion">
+                    Usuario
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <section class="contenido">
+
+
+            <!-- =================================
+                 PRESENTACIÓN
+            ================================== -->
+
+            <div class="ubicacion-hero">
+
+                <h2>
+                    📍 Ubicación y seguridad
+                </h2>
+
+                <p>
+                    NorApp permite que una persona autorizada
+                    pueda consultar la ubicación registrada
+                    del adulto mayor, especialmente durante
+                    una situación de emergencia.
+                </p>
+
+            </div>
+
+
+            <!-- =================================
+                 RESUMEN
+            ================================== -->
+
+            <section class="cards">
+
+
+                <div class="card ubicacion-card">
+
+                    <h3>
+                        📍 Estado
+                    </h3>
+
+                    <div class="numero">
+                        Activo
+                    </div>
+
+                    <p>
+                        Ubicación registrada
+                    </p>
+
+                </div>
+
+
+                <div class="card zona-card">
+
+                    <h3>
+                        🏠 Zona
+                    </h3>
+
+                    <div
+                        class="numero"
+                        id="ciudadUbicacion"
+                    >
+                        Santiago
+                    </div>
+
+                    <p>
+                        Chile
+                    </p>
+
+                </div>
+
+
+                <div class="card actualizacion-card">
+
+                    <h3>
+                        🕐 Actualización
+                    </h3>
+
+                    <div class="numero">
+                        Ahora
+                    </div>
+
+                    <p>
+                        Prototipo
+                    </p>
+
+                </div>
+
+
+                <div class="card emergencia-card">
+
+                    <h3>
+                        🚨 Emergencia
+                    </h3>
+
+                    <div
+                        class="numero"
+                        id="estadoUbicacion"
+                    >
+                        ✓
+                    </div>
+
+                    <p id="textoEstadoUbicacion">
+                        Sin emergencia
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================
+                 UBICACIÓN ACTUAL
+            ================================== -->
+
+            <section class="panel">
+
+                <h2>
+                    📍 Ubicación actual
+                </h2>
+
+                <p>
+                    La última ubicación registrada
+                    corresponde a:
+                </p>
+
+                <h3>
+
+                    📍
+
+                    <span id="ubicacionCiudad">
+                        Santiago, Chile
+                    </span>
+
+                </h3>
+
+                <p>
+
+                    Estado:
+
+                    <strong>
+                        Ubicación disponible
+                    </strong>
+
+                </p>
+
+            </section>
+
+
+            <!-- =================================
+                 MAPA
+            ================================== -->
+
+            <section class="panel">
+
+                <h2>
+                    🗺️ Mapa de ubicación
+                </h2>
+
+                <div id="mapa">
+
+                    <div class="marcador">
+                        📍
+                    </div>
+
+                    <h3>
+
+                        <span id="nombreMapa">
+                            Usuario
+                        </span>
+
+                    </h3>
+
+                    <p>
+
+                        📍
+
+                        <span id="ciudadMapa">
+                            Santiago, Chile
+                        </span>
+
+                    </p>
+
+                    <p>
+                        Ubicación simulada para el prototipo
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================
+                 EMERGENCIA
+            ================================== -->
+
+            <section
+                class="panel"
+                id="ubicacionEmergencia"
+                style="display: none;"
+            >
+
+                <h2>
+                    🚨 Ubicación asociada a emergencia
+                </h2>
+
+                <p>
+                    NorApp registró una situación
+                    de emergencia.
+                </p>
+
+                <p id="estadoZona">
+                    Ubicación registrada para emergencia
+                </p>
+
+                <p>
+                    📍 Santiago, Chile
+                </p>
+
+                <p>
+                    👨‍👩‍👧 Esta información podría ser
+                    compartida con el familiar autorizado
+                    durante el protocolo de emergencia.
+                </p>
+
+                <span
+                    id="etiquetaUbicacion"
+                    style="
+                        display: inline-block;
+                        padding: 9px 15px;
+                        border-radius: 20px;
+                        background: #E8F5E9;
+                        color: #2E7D32;
+                        font-weight: bold;
+                    "
+                >
+                    ✓ Ubicación disponible
+                </span>
+
+            </section>
+
+
+            <!-- =================================
+                 FUNCIONAMIENTO
+            ================================== -->
+
+            <section class="panel">
+
+                <h2>
+                    🔄 ¿Cómo funcionaría?
+                </h2>
+
+
+                <div class="lista">
+
+
+                    <div class="item">
+
+                        <strong>
+                            1. 📍 Registro
+                        </strong>
+
+                        <p>
+                            El sistema registra la ubicación
+                            del adulto mayor mediante el
+                            dispositivo correspondiente.
+                        </p>
+
+                    </div>
+
+
+                    <div class="item">
+
+                        <strong>
+                            2. 👨‍👩‍👧 Consulta
+                        </strong>
+
+                        <p>
+                            La persona autorizada puede
+                            consultar la ubicación registrada.
+                        </p>
+
+                    </div>
+
+
+                    <div class="item">
+
+                        <strong>
+                            3. 🚨 Emergencia
+                        </strong>
+
+                        <p>
+                            Si se registra una emergencia,
+                            la ubicación puede asociarse
+                            al evento.
+                        </p>
+
+                    </div>
+
+
+                    <div class="item">
+
+                        <strong>
+                            4. 🛡️ Seguridad
+                        </strong>
+
+                        <p>
+                            La información puede ayudar
+                            a localizar al adulto mayor
+                            durante una situación de riesgo.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================
+                 FUNCIONES RELACIONADAS
+            ================================== -->
+
+            <section class="panel">
+
+                <h2>
+                    🔗 Funciones relacionadas
+                </h2>
+
+                <p>
+                    Desde aquí puedes acceder rápidamente
+                    a otras funciones de NorApp.
+                </p>
+
+
+                <div class="botones-ubicacion">
+
+
+                    <a href="alertas.html">
+
+                        <button
+                            class="btn"
+                            type="button"
+                        >
+                            🚨 Ver alertas
+                        </button>
+
+                    </a>
+
+
+                    <a href="caidas.html">
+
+                        <button
+                            class="btn"
+                            type="button"
+                        >
+                            ⚠️ Detección de caídas
+                        </button>
+
+                    </a>
+
+
+                    <a href="familia.html">
+
+                        <button
+                            class="btn"
+                            type="button"
+                        >
+                            👨‍👩‍👧 Familiar
+                        </button>
+
+                    </a>
+
+
+                    <a href="historial.html">
+
+                        <button
+                            class="btn"
+                            type="button"
+                        >
+                            📋 Historial
+                        </button>
+
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================
+                 AVISO
+            ================================== -->
+
+            <section class="aviso-gps">
+
+                <strong>
+                    ℹ️ Importante sobre el prototipo
+                </strong>
+
+                <p>
+                    En esta versión escolar, la ubicación
+                    mostrada es simulada. El GPS real se
+                    incorporará posteriormente mediante
+                    el dispositivo y la conexión con Arduino.
+                </p>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         JAVASCRIPT PRINCIPAL
+    ========================================= -->
+
+    <script src="../js/app.js"></script>
+
+
+    <!-- =========================================
+         JAVASCRIPT DE UBICACIÓN
+    ========================================= -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const nombre =
+                    localStorage.getItem(
+                        "norappUsuario"
+                    );
+
+                const ciudad =
+                    localStorage.getItem(
+                        "norappCiudad"
+                    );
+
+
+                const nombreUbicacion =
+                    document.getElementById(
+                        "nombreUbicacion"
+                    );
+
+                const nombreMapa =
+                    document.getElementById(
+                        "nombreMapa"
+                    );
+
+                const ciudadUbicacion =
+                    document.getElementById(
+                        "ciudadUbicacion"
+                    );
+
+                const ciudadMapa =
+                    document.getElementById(
+                        "ciudadMapa"
+                    );
+
+                const ubicacionCiudad =
+                    document.getElementById(
+                        "ubicacionCiudad"
+                    );
+
+
+                /* =========================
+                   NOMBRE
+                ========================= */
+
+                if (nombre) {
+
+                    if (nombreUbicacion) {
+
+                        nombreUbicacion.textContent =
+                            nombre;
+
+                    }
+
+
+                    if (nombreMapa) {
+
+                        nombreMapa.textContent =
+                            nombre;
+
+                    }
+
+                }
+
+
+                /* =========================
+                   CIUDAD
+                ========================= */
+
+                if (ciudad) {
+
+                    if (ciudadUbicacion) {
+
+                        ciudadUbicacion.textContent =
+                            ciudad;
+
+                    }
+
+
+                    if (ciudadMapa) {
+
+                        ciudadMapa.textContent =
+                            ciudad + ", Chile";
+
+                    }
+
+
+                    if (ubicacionCiudad) {
+
+                        ubicacionCiudad.textContent =
+                            ciudad + ", Chile";
+
+                    }
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

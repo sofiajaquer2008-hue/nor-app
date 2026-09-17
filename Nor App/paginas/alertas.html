@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NorApp | Alertas</title>
+
+    <link rel="stylesheet" href="../css/estilo.css">
+
+    <style>
+
+        /* ==============================
+           CERRAR SESIÓN
+        ============================== */
+
+        .cerrar-sesion {
+            margin-top: 15px !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+            padding-top: 15px !important;
+        }
+
+        .cerrar-sesion:hover {
+            background: #C62828 !important;
+            color: #FFFFFF !important;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- =====================================
+         MENÚ
+         ===================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h1>NorApp</h1>
+            <p>Asistencia y cuidado</p>
+        </div>
+
+        <nav class="menu">
+
+            <a href="../index.html">
+                🏠 Inicio
+            </a>
+
+            <a href="perfil.html">
+                👤 Perfil
+            </a>
+
+            <a href="salud.html">
+                ❤️ Salud
+            </a>
+
+            <a href="caidas.html">
+                🚨 Detección de caídas
+            </a>
+
+            <a href="ubicacion.html">
+                📍 Ubicación
+            </a>
+
+            <a href="recordatorios.html">
+                💊 Recordatorios
+            </a>
+
+            <a href="alertas.html" class="activo">
+                🔔 Alertas
+            </a>
+
+            <a href="asistente.html">
+                🤖 Asistente
+            </a>
+
+            <a href="familia.html">
+                👨‍👩‍👧 Familia
+            </a>
+
+            <a href="historial.html">
+                📋 Historial
+            </a>
+
+            <a href="configuracion.html">
+                ⚙️ Configuración
+            </a>
+
+
+            <!-- ==============================
+                 CERRAR SESIÓN
+            ============================== -->
+
+            <a
+                href="#"
+                onclick="cerrarSesion(); return false;"
+                class="cerrar-sesion"
+            >
+                🚪 Cerrar sesión
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =====================================
+         CONTENIDO
+         ===================================== -->
+
+    <main class="main">
+
+        <!-- ENCABEZADO -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h2>
+                    🔔 Alertas
+                </h2>
+
+                <p>
+                    Supervisión de situaciones que requieren atención
+                </p>
+
+            </div>
+
+            <div class="usuario">
+
+                👤 <span id="nombreAlertas">
+                    Usuario
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================
+             RESUMEN
+             ===================================== -->
+
+        <section class="cards">
+
+            <div class="card">
+
+                <h3>
+                    🚨 Alertas activas
+                </h3>
+
+                <div
+                    class="numero"
+                    id="numeroEmergencias"
+                >
+                    0
+                </div>
+
+                <p>
+                    Situaciones pendientes
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    👨‍👩‍👧 Familiar
+                </h3>
+
+                <div class="numero">
+                    Disponible
+                </div>
+
+                <p>
+                    Contacto responsable
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    📍 Ubicación
+                </h3>
+
+                <div class="numero">
+                    Activa
+                </div>
+
+                <p>
+                    Disponible para el prototipo
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    🛡️ Sistema
+                </h3>
+
+                <div class="numero">
+                    Activo
+                </div>
+
+                <p>
+                    Supervisión habilitada
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             ESTADO ACTUAL
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                🛡️ Estado actual
+            </h3>
+
+            <div id="estadoAlerta">
+
+                <p>
+                    ✓ No existen alertas activas.
+                </p>
+
+                <span class="estado-normal">
+                    Sistema normal
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             ALERTA DE CAÍDA
+             ===================================== -->
+
+        <section
+            class="panel"
+            id="alertaCaida"
+            style="display: none;"
+        >
+
+            <h3>
+                🚨 Alerta por posible caída
+            </h3>
+
+            <p>
+                NorApp registró una situación
+                compatible con una posible caída.
+            </p>
+
+            <p>
+                🤖 El asistente habría iniciado
+                el protocolo de evaluación.
+            </p>
+
+            <p>
+                👨‍👩‍👧 Se generaría una notificación
+                al familiar responsable.
+            </p>
+
+            <p>
+                📍 Se utilizaría la ubicación
+                registrada en el sistema.
+            </p>
+
+            <p id="fechaAlerta">
+                🕐 Fecha y hora: Pendiente
+            </p>
+
+            <div
+                style="
+                    display: inline-block;
+                    margin-top: 10px;
+                    padding: 12px 20px;
+                    border-radius: 20px;
+                    background: #ffebee;
+                    color: #c62828;
+                    font-weight: bold;
+                    font-size: 1.05rem;
+                "
+            >
+                🚨 Alerta activa
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             PROTOCOLO
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                🔄 Protocolo de respuesta
+            </h3>
+
+            <p>
+                Cuando NorApp detecta una situación
+                de emergencia, el prototipo representa
+                el siguiente flujo:
+            </p>
+
+            <div class="lista">
+
+                <div class="item">
+
+                    <strong>
+                        1. 🚨 Detección
+                    </strong>
+
+                    <p>
+                        Se detecta una posible situación
+                        de emergencia.
+                    </p>
+
+                </div>
+
+
+                <div class="item">
+
+                    <strong>
+                        2. 🤖 Evaluación
+                    </strong>
+
+                    <p>
+                        El asistente conversa con la
+                        persona para evaluar la situación.
+                    </p>
+
+                </div>
+
+
+                <div class="item">
+
+                    <strong>
+                        3. 📋 Registro
+                    </strong>
+
+                    <p>
+                        La situación queda registrada
+                        en el sistema.
+                    </p>
+
+                </div>
+
+
+                <div class="item">
+
+                    <strong>
+                        4. 👨‍👩‍👧 Aviso familiar
+                    </strong>
+
+                    <p>
+                        El prototipo representa el aviso
+                        al familiar responsable.
+                    </p>
+
+                </div>
+
+
+                <div class="item">
+
+                    <strong>
+                        5. 📍 Ubicación
+                    </strong>
+
+                    <p>
+                        Se asocia la ubicación disponible
+                        con la situación.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             ACCIONES
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                ⚡ Probar el sistema
+            </h3>
+
+            <p>
+                Puedes utilizar estas opciones para
+                comprobar el funcionamiento del prototipo.
+            </p>
+
+            <div class="botones">
+
+                <button
+                    class="btn"
+                    onclick="simularAlerta()"
+                >
+                    🚨 Simular alerta
+                </button>
+
+
+                <a href="caidas.html">
+
+                    <button class="btn">
+                        🚨 Probar detección de caída
+                    </button>
+
+                </a>
+
+            </div>
+
+            <p id="mensajeAlerta"></p>
+
+        </section>
+
+
+        <!-- =====================================
+             SEGUIMIENTO
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                📋 Seguimiento
+            </h3>
+
+            <p>
+                Revisa la información relacionada
+                con las situaciones registradas.
+            </p>
+
+            <div class="botones">
+
+                <a href="historial.html">
+
+                    <button class="btn">
+                        📋 Ver historial
+                    </button>
+
+                </a>
+
+
+                <a href="ubicacion.html">
+
+                    <button class="btn">
+                        📍 Ver ubicación
+                    </button>
+
+                </a>
+
+
+                <a href="familia.html">
+
+                    <button class="btn">
+                        👨‍👩‍👧 Ver familiar
+                    </button>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             PREPARACIÓN PARA ARDUINO
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                ⌚ Conexión con el dispositivo
+            </h3>
+
+            <p>
+                Esta sección representa la función que
+                posteriormente podrá recibir información
+                desde el reloj o dispositivo conectado.
+            </p>
+
+            <div class="aviso">
+
+                <strong>
+                    🔌 Próximo paso:
+                </strong>
+
+                <p>
+                    La detección automática de una posible
+                    caída será conectada posteriormente
+                    al Arduino.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             INFORMACIÓN DEL PROTOTIPO
+             ===================================== -->
+
+        <section class="panel">
+
+            <h3>
+                ℹ️ Sobre las alertas
+            </h3>
+
+            <p>
+                Las alertas permiten representar cómo
+                NorApp podría informar a un familiar
+                cuando se detecta una situación que
+                requiere atención.
+            </p>
+
+            <p>
+                En esta versión escolar, las alertas,
+                notificaciones, ubicación y comunicación
+                con familiares son simuladas.
+            </p>
+
+            <div class="aviso">
+
+                <strong>
+                    ⚠️ Importante:
+                </strong>
+
+                <p>
+                    Este prototipo no realiza
+                    comunicaciones reales con servicios
+                    de emergencia.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================
+         JAVASCRIPT
+         ===================================== -->
+
+    <script src="../js/app.js"></script>
+
+
+    <!-- =====================================
+         MOSTRAR USUARIO
+         ===================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const nombre =
+                    localStorage.getItem(
+                        "norappUsuario"
+                    );
+
+                const nombreAlertas =
+                    document.getElementById(
+                        "nombreAlertas"
+                    );
+
+
+                if (nombre && nombreAlertas) {
+
+                    nombreAlertas.textContent =
+                        nombre;
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
